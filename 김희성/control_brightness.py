@@ -9,5 +9,5 @@ pip install wmi
 """
 
 import wmi
-brightness = 100
+brightness = 100 # brightness Value is between 0-100, Int type.
 wmi.WMI(namespace='wmi').WmiMonitorBrightnessMethods()[0].WmiSetBrightness(brightness, 0)
