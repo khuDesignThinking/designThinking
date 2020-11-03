@@ -1,2 +1,2 @@
 ﻿  소스.cpp
-  design_thinking_project.vcxproj -> C:\Users\user\Desktop\soyung\design_thinking\design_thinking_project_default\x64\Debug\design_thinking_project.exe
+C:\Users\franc\Desktop\디사인적사고\designThinking\design_thinking_project_default\design_thinking_project\소스.cpp(8,10): fatal error C1083: 포함 파일을 열 수 없습니다. 'opencv2/core.hpp': No such file or directory
