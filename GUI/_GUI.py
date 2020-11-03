@@ -3,7 +3,7 @@ date : 2020/10/23
 copy from https://webnautes.tistory.com/1290
 next thing I have to do is combine Grapic_User_interface.py & _GUI.py module
 """
-from IPython.utils import capture
+#from IPython.utils import capture
 import numpy as np
 import cv2
 import sys
