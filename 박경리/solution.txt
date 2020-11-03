@@ -1,6 +1,0 @@
-git status
-git add -A
-git status
-git commit -m"할말"
-git status
-git push
