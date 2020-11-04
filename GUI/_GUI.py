@@ -91,7 +91,7 @@ class ImageViewer(QtWidgets.QWidget):
 
     def initUI(self):
         self.setWindowTitle('DESIGN THINKING PROJECT')
-        self.setWindowIcon(QIcon('resource/images/networking.png'))
+        self.setWindowIcon(QIcon('resource/image/eye.png'))
         self.move(300,300)
         self.resize(500,800)
     
@@ -143,6 +143,10 @@ def main():
     layout_widget.setLayout(vertical_layout)
 
     main_window = QtWidgets.QMainWindow()
+    main_window.setWindowTitle('DESIGN THINKING PROJECT')
+    main_window.setWindowIcon(QIcon('resource/image/eye.png'))
+    main_window.move(300,300)
+    main_window.resize(500,500)
     main_window.setCentralWidget(layout_widget)
     main_window.show()
     sys.exit(app.exec_())
