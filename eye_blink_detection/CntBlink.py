@@ -7,9 +7,9 @@ IMG_SIZE = (34, 26)
 
 detector = dlib.get_frontal_face_detector()
 #dat.
-predictor = dlib.shape_predictor('C:\\Users\\dkwjd\\Desktop\\eye_blink_detector-master\\eye_blink_detector-master\\shape_predictor_68_face_landmarks.dat')
+predictor = dlib.shape_predictor('resource/data/shape_predictor_68_face_landmarks.dat')
 
-model = load_model('C:\\Users\\dkwjd\\Desktop\\eye_blink_detector-master\\eye_blink_detector-master\\models\\2018_12_17_22_58_35.h5')
+model = load_model('resource/models/2018_12_17_22_58_35.h5')
 model.summary()
 
 def crop_eye(img, eye_points):
