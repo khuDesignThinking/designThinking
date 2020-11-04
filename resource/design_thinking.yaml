@@ -1,4 +1,4 @@
-name: base
+name: design_thinking
 channels:
   - defaults
 dependencies:

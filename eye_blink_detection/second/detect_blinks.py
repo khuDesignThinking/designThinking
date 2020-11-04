@@ -63,7 +63,7 @@ def main():
     # the facial landmark predictor
     print("[INFO] loading facial landmark predictor...")
     detector = dlib.get_frontal_face_detector()
-    predictor = dlib.shape_predictor("shpae_predictor_68_face_landmarks.dat 있는 파일 경로")
+    predictor = dlib.shape_predictor("resource/data/shape_predictor_68_face_landmarks.dat")
 
     # grab the indexes of the facial landmarks for the left and
     # right eye, respectively
