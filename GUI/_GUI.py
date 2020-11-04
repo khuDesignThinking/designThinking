@@ -12,6 +12,17 @@ from PyQt5 import QtWidgets
 from PyQt5 import QtGui
 from PyQt5.QtGui import QIcon
 
+def convert_window_freestyle(name: str) -> None:
+    """
+    to visualize, make window flexible
+    :param
+        name: window's name
+    :return
+        None
+    """
+    cv2.namedWindow(name, cv2.WINDOW_NORMAL)
+    return None
+
 
 class ShowVideo(QtCore.QObject):
     camera = cv2.VideoCapture(0)
@@ -53,7 +64,7 @@ class ShowVideo(QtCore.QObject):
                                     QtGui.QImage.Format_RGB888)
             self.VideoSignal1.emit(qt_image1)
             loop = QtCore.QEventLoop()
-            QtCore.QTimer.singleShot(25, loop.quit) #25 ms
+            QtCore.QTimer.singleShot(90, loop.quit) #90 ms
 
             self.capture_variable = False
             loop.exec_()
@@ -79,8 +90,8 @@ class ImageViewer(QtWidgets.QWidget):
         self.image = QtGui.QImage()
 
     def initUI(self):
-        self.setWindowTitle('CITIZEN PROJ')
-        self.setWindowIcon(QIcon('./resource/images/networking.png'))
+        self.setWindowTitle('DESIGN THINKING PROJECT')
+        self.setWindowIcon(QIcon('resource/images/networking.png'))
         self.move(300,300)
         self.resize(500,800)
     
@@ -98,10 +109,8 @@ class ImageViewer(QtWidgets.QWidget):
 def external_function(image: np.ndarray):
     print(image)
 
-
-if __name__ == '__main__':
+def main():
     app = QtWidgets.QApplication(sys.argv)
-
 
     thread = QtCore.QThread()
     thread.start()
@@ -137,3 +146,7 @@ if __name__ == '__main__':
     main_window.setCentralWidget(layout_widget)
     main_window.show()
     sys.exit(app.exec_())
+
+
+if __name__ == '__main__':
+    main()

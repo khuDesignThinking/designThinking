@@ -10,6 +10,7 @@ pip install dlib
 pip install imutils
 pip install keras
 pip install tensorflow
+눈 깜빡이는데 걸리는 시간 속도는 평균 100 ~ 150 밀리 초이다.
 """
 
 import cv2, dlib
