@@ -7,9 +7,11 @@ import time
 IMG_SIZE = (34, 26)
 
 detector = dlib.get_frontal_face_detector()
-# C:\\Users\\dkwjd\\Desktop\\eye_blink_detector-master\\eye_blink_detector-master\\shape_predictor_68_face_landmarks.dat
+# 'C:\\Users\\dkwjd\\Desktop\\eye_blink_detector-master\\eye_blink_detector-master\\shape_predictor_68_face_landmarks.dat'
+# 'resource/data/shape_predictor_68_face_landmarks.dat'
 predictor = dlib.shape_predictor('resource/data/shape_predictor_68_face_landmarks.dat')
 # 'C:\\Users\\dkwjd\\Desktop\\eye_blink_detector-master\\eye_blink_detector-master\\models\\2018_12_17_22_58_35.h5'
+# 'resource/models/2018_12_17_22_58_35.h5'
 model = load_model('resource/models/2018_12_17_22_58_35.h5')
 model.summary()
 
@@ -35,7 +37,10 @@ def crop_eye(img, eye_points):
 # main
 cap = cv2.VideoCapture(0)
 cnt_blink = 0
-eye_condition = "empty string"
+eye_condition = "initialize"
+
+start_time = time.time()
+cnt_list = []
 
 while cap.isOpened():
   ret, img_ori = cap.read()
@@ -49,9 +54,8 @@ while cap.isOpened():
   gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
   faces = detector(gray)
-
-  for face in faces:
-    
+  
+  for face in faces:  
     shapes = predictor(gray, face)
     shapes = face_utils.shape_to_np(shapes)
 
@@ -61,9 +65,6 @@ while cap.isOpened():
     eye_img_l = cv2.resize(eye_img_l, dsize=IMG_SIZE)
     eye_img_r = cv2.resize(eye_img_r, dsize=IMG_SIZE)
     eye_img_r = cv2.flip(eye_img_r, flipCode=1)
-
-    #cv2.imshow('l', eye_img_l)
-    #cv2.imshow('r', eye_img_r)
 
     eye_input_l = eye_img_l.copy().reshape((1, IMG_SIZE[1], IMG_SIZE[0], 1)).astype(np.float32) / 255.
     eye_input_r = eye_img_r.copy().reshape((1, IMG_SIZE[1], IMG_SIZE[0], 1)).astype(np.float32) / 255.
@@ -79,7 +80,6 @@ while cap.isOpened():
       eye_condition = "blinked"
       cnt_blink += 1
       print("blinked")
-    #이전 프레임에서 눈 감았다고 인식했으면 카운트 안함
     elif(pred_l <= 0.1 and pred_r <= 0.1 and eye_condition == "blinked"):
       print("deleted...")
     else:
@@ -87,16 +87,25 @@ while cap.isOpened():
     
     state_l = state_l % pred_l
     state_r = state_r % pred_r
+    Text = "Blinks : " + str(cnt_blink)
 
     cv2.rectangle(img, pt1=tuple(eye_rect_l[0:2]), pt2=tuple(eye_rect_l[2:4]), color=(255,255,255), thickness=2)
     cv2.rectangle(img, pt1=tuple(eye_rect_r[0:2]), pt2=tuple(eye_rect_r[2:4]), color=(255,255,255), thickness=2)
-
-    Text = "Blinks : " + str(cnt_blink)
-
+    
     cv2.putText(img, state_l, tuple(eye_rect_l[0:2]), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255,255,255), 2)
     cv2.putText(img, state_r, tuple(eye_rect_r[0:2]), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255,255,255), 2)   
     cv2.putText(img, Text, (30,30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,0), 2)
 
   cv2.imshow('result', img)
+  
+  curr_time = time.time()
+  if( (curr_time - start_time) > 10 ):
+    print("10 sec past")
+    cnt_list.append(cnt_blink)
+    cnt_blink = 0
+    start_time = time.time()
+  
   if cv2.waitKey(1) == ord('q'):
+    print("BlinkCount per 10 sec list")
+    print(cnt_list)
     break
