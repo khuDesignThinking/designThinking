@@ -106,6 +106,10 @@ while cap.isOpened():
     start_time = time.time()
   
   if cv2.waitKey(1) == ord('q'):
+    end_time = time.time()
+    duration = end_time - start_time
+    if(int(duration) >= 1):
+      cnt_list.append( (cnt_blink, int(duration)) )
     print("BlinkCount per 10 sec list")
     print(cnt_list)
     break
