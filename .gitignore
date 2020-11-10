@@ -34,3 +34,5 @@
 # VScode and VS
 *.vscode
 *.vs
+
+__pycache__
