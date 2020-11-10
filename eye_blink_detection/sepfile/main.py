@@ -50,6 +50,7 @@ while(True):
     
     if(duration == -1 or int(duration) == 0):
         cnt_list.append(cnt_blink)
+        cnt_blink = 0
     else:
         fin_elem = (cnt_blink, int(duration))
         cnt_list.append(fin_elem)
