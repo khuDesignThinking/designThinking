@@ -3,11 +3,10 @@ dev : 김희성
 date : 2020/11/12
 
 This module show graph.jpg every 10second
-dependency : draw_graph.py, resource/images/graph.jpg
+dependency : draw_graph.py, 
 
 Next thing I have to do is connect with main thread
 """
-#import numpy as np
 import cv2
 import sys
 from PyQt5 import QtCore
@@ -19,6 +18,7 @@ import draw_graph as dg
 
 class ShowVideo(QtCore.QObject):
     image_directory = "resource/images/graph.jpg"
+    dg.update_graph(image_directory)
 
     image = cv2.imread(image_directory, cv2.IMREAD_COLOR)
 
@@ -68,7 +68,7 @@ class ImageViewer(QtWidgets.QWidget):
 
     def initUI(self):
         pass
-        # self.setWindowTitle('CITIZEN PROJ')
+        # self.setWindowTitle('DESIGN THINKING PROJ')
         # self.setWindowIcon(QIcon('./resource/images/networking.png'))
         # self.move(300,300)
         # self.resize(300,600)
