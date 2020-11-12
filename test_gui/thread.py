@@ -10,23 +10,24 @@ curr_time=0
 end_time=0
 
 
-def crop_eye(img, eye_points):
-     x1, y1 = np.amin(eye_points, axis=0)
-     x2, y2 = np.amax(eye_points, axis=0)
-     cx, cy = (x1 + x2) / 2, (y1 + y2) / 2
+def crop_eye(gray, img, eye_points):
+      x1, y1 = np.amin(eye_points, axis=0)
+      x2, y2 = np.amax(eye_points, axis=0)
+      cx, cy = (x1 + x2) / 2, (y1 + y2) / 2
 
-     w = (x2 - x1) * 1.2
-     h = w * IMG_SIZE[1] / IMG_SIZE[0]
+      w = (x2 - x1) * 1.2
+      h = w * IMG_SIZE[1] / IMG_SIZE[0]
 
-     margin_x, margin_y = w / 2, h / 2
-     min_x, min_y = int(cx - margin_x), int(cy - margin_y)
-     max_x, max_y = int(cx + margin_x), int(cy + margin_y)
+      margin_x, margin_y = w / 2, h / 2
 
-     eye_rect = np.rint([min_x, min_y, max_x, max_y]).astype(np.int)
+      min_x, min_y = int(cx - margin_x), int(cy - margin_y)
+      max_x, max_y = int(cx + margin_x), int(cy + margin_y)
 
-     eye_img = gray[eye_rect[1]:eye_rect[3], eye_rect[0]:eye_rect[2]]
+      eye_rect = np.rint([min_x, min_y, max_x, max_y]).astype(np.int)
 
-     return eye_img, eye_rect
+      eye_img = gray[eye_rect[1]:eye_rect[3], eye_rect[0]:eye_rect[2]]
+
+      return eye_img, eye_rect
 
 IMG_SIZE = (34, 26)
 cnt_blink = 0
@@ -49,7 +50,7 @@ def detect_blink(gray):
     global curr_time
     global start_time
     global end_time
-    cap = cv2.VideoCapture(1)
+    cap = cv2.VideoCapture(0)
 
     # if(종료 버튼 누르면):  <== GUI로 구현   현재는 그런 기능 안넣음 강제종료 못함
     #     exit_condition = False
@@ -75,8 +76,8 @@ def detect_blink(gray):
         for face in faces:  
           shapes = predictor(gray, face)
           shapes = face_utils.shape_to_np(shapes)
-          eye_img_l, eye_rect_l = crop_eye(gray, eye_points=shapes[36:42])
-          eye_img_r, eye_rect_r = crop_eye(gray, eye_points=shapes[42:48])
+          eye_img_l, eye_rect_l = crop_eye(gray, img, eye_points=shapes[36:42])
+          eye_img_r, eye_rect_r = crop_eye(gray, img, eye_points=shapes[42:48])
           eye_img_l = cv2.resize(eye_img_l, dsize=IMG_SIZE)
           eye_img_r = cv2.resize(eye_img_r, dsize=IMG_SIZE)
           eye_img_r = cv2.flip(eye_img_r, flipCode=1)
