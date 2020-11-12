@@ -34,7 +34,9 @@
 # VScode and VS
 *.vscode
 *.vs
+*.csv
 
 __pycache__
 
 graph.jpg
+
