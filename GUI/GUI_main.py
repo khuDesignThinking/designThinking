@@ -123,6 +123,7 @@ def main():
     main_window.setCentralWidget(layout_widget)
     main_window.show()
     sys.exit(app.exec_())
+    
 
 
 if __name__ == '__main__':
