@@ -2,10 +2,10 @@
 dev : 김희성
 date : 2020/11/12
 
-This module is main of GUI, 
-dependency : GUI_main.py, resource/images/graph.jpg
+This module show graph.jpg every 10second
+dependency : draw_graph.py, resource/images/graph.jpg
 
-Next thing I have to do is get graph image and update every sec
+Next thing I have to do is connect with main thread
 """
 #import numpy as np
 import cv2
@@ -14,10 +14,11 @@ from PyQt5 import QtCore
 from PyQt5 import QtWidgets
 from PyQt5 import QtGui
 from PyQt5.QtGui import QIcon
+import draw_graph as dg
 
 
 class ShowVideo(QtCore.QObject):
-    image_directory = "resource/images/0.jpg"
+    image_directory = "resource/images/graph.jpg"
 
     image = cv2.imread(image_directory, cv2.IMREAD_COLOR)
 
@@ -36,13 +37,9 @@ class ShowVideo(QtCore.QObject):
 
     @QtCore.pyqtSlot()
     def startVideo(self):
-
         self.run_program = True
-        k = 0
         while self.run_program:
-            k += 1
-            s = k % 3
-            self.image_directory = f"resource/images/{s}.jpg"
+            dg.update_graph()
             image = cv2.imread(self.image_directory, cv2.IMREAD_COLOR)
             color_swapped_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
@@ -53,15 +50,9 @@ class ShowVideo(QtCore.QObject):
                                     QtGui.QImage.Format_RGB888)
             self.VideoSignal1.emit(qt_image1)
             loop = QtCore.QEventLoop()
-            QtCore.QTimer.singleShot(10000, loop.quit) # every 10,000ms 10s update image
+            QtCore.QTimer.singleShot(1000, loop.quit) # every 10,000ms 10s update image
             loop.exec_()
     
-    def _senseCapture(self) -> bool:
-        """If Capture button is clicked, return True else return False"""
-        if self.run_program != True:
-            print("You should turn on the video")
-
-
 
 class ImageViewer(QtWidgets.QWidget):
     def __init__(self, parent=None):
@@ -76,10 +67,11 @@ class ImageViewer(QtWidgets.QWidget):
         self.image = QtGui.QImage()
 
     def initUI(self):
-        self.setWindowTitle('CITIZEN PROJ')
-        self.setWindowIcon(QIcon('./resource/images/networking.png'))
-        self.move(300,300)
-        self.resize(300,600)
+        pass
+        # self.setWindowTitle('CITIZEN PROJ')
+        # self.setWindowIcon(QIcon('./resource/images/networking.png'))
+        # self.move(300,300)
+        # self.resize(300,600)
     
     @QtCore.pyqtSlot(QtGui.QImage)
     def setImage(self, image):
