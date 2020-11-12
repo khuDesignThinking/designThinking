@@ -11,20 +11,22 @@ Next thing I have to do is fix error, at 27 line
 ValueError: invalid literal for int() with base 10: ' 12.1' 
 """
 from matplotlib import pyplot as plt
-import pandas as pd
 
-def load_source(source_directory:str = "resource/data/count_blink.csv") -> "list[int,tuple]":
+
+def load_source(source_directory:str = "resource/data/count_blink.csv") -> list:
     """
     If there is no csv file, This function make count_blink.csv file
     """
-    try:
-        data = pd.read_csv(source_directory)
+    try: #Check whether count_blink.csv exist.
+        with open(source_directory, 'r') as f:
+            pass
     except:
         with open(source_directory, 'w') as f:
             f.write("15, 12, 15, 16, 10, 14") # this is test data
-            
-    data = pd.read_csv(source_directory)
-    string_blink_count = list(data.columns)
+
+    with open(source_directory, 'r') as f:
+        data = f.read()
+    string_blink_count = data.split(",")
     int_blink_count = [int(blink_data) for blink_data in string_blink_count]
     return int_blink_count
     
