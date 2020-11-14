@@ -100,6 +100,11 @@ while (True):
   with open(file_name, 'w', newline='') as f:
     writer = csv.writer(f)
     writer.writerows([cnt_list])
+  #여기서부터 GUI
+  #cnt_list 데이터를 그래프로 나타내기
+  #만약 gui 파일 이름이 GUI, 메소드 이름이 drawGraph라면
+  #위에 import GUI
+  #GUI.drawGraph(cnt_list)
 
   #마지막에 필요(강제종료인 경우)
   if(exit_condition == False):

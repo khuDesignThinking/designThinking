@@ -1,19 +1,7 @@
-"""
-dev : 김희성
-date : 2020/11/12
-dependency : resource/data/count_blink.csv
-
-This module is called, by GUI_main.py, every ten second
-make, two files
-1. "resource/data/count_blink.csv" 
-2. "resource/images/graph.jpg" <overwrite this image>
-Next thing I have to do is fix error, at 27 line
-ValueError: invalid literal for int() with base 10: ' 12.1' 
-"""
 from matplotlib import pyplot as plt
 
 
-def load_source(source_directory:str = "C:\\Users\\dkwjd\\Desktop\\디자인적사고\\designThinking\\resource\\data\\count_blink.csv") -> list:
+def load_source(source_directory:str = "C:\\Users\\dkwjd\\Desktop\\eye_blink_detector-master\\eye_blink_detector-master\\dataset\\count_blink.csv") -> list:
     """
     If there is no csv file, This function make count_blink.csv file
     """
@@ -31,7 +19,7 @@ def load_source(source_directory:str = "C:\\Users\\dkwjd\\Desktop\\디자인적�
     return int_blink_count
     
 
-def update_graph(image_directory: str = "C:\\Users\\dkwjd\\Desktop\\디자인적사고\\designThinking\\resource\\images\\graph.jpg") -> None:
+def update_graph(image_directory: str = "C:\\Users\\dkwjd\\Desktop\\eye_blink_detector-master\\eye_blink_detector-master\\dataset\\graph.jpg") -> None:
     """
     This function make "resource/images/graph.jpg" file
     param: 
