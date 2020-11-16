@@ -40,10 +40,10 @@ def cntBlinkAddFile():
   detector = dlib.get_frontal_face_detector()
   # 'C:\\Users\\dkwjd\\Desktop\\eye_blink_detector-master\\eye_blink_detector-master\\shape_predictor_68_face_landmarks.dat'
   # 'resource/data/shape_predictor_68_face_landmarks.dat'
-  predictor = dlib.shape_predictor('C:\\Users\\dkwjd\\Desktop\\eye_blink_detector-master\\eye_blink_detector-master\\shape_predictor_68_face_landmarks.dat')
+  predictor = dlib.shape_predictor('resource/data/shape_predictor_68_face_landmarks.dat')
   # 'C:\\Users\\dkwjd\\Desktop\\eye_blink_detector-master\\eye_blink_detector-master\\models\\2018_12_17_22_58_35.h5'
   # 'resource/models/2018_12_17_22_58_35.h5'
-  model = load_model('C:\\Users\\dkwjd\\Desktop\\eye_blink_detector-master\\eye_blink_detector-master\\models\\2018_12_17_22_58_35.h5')
+  model = load_model('resource/models/2018_12_17_22_58_35.h5')
   model.summary()
 
   cap = cv2.VideoCapture(0)
@@ -110,8 +110,8 @@ def cntBlinkAddFile():
     print("10 sec past")
     #print(cnt_list)
     #C:\\Users\\dkwjd\\Desktop\\eye_blink_detector-master\\eye_blink_detector-master\\dataset\\count_blink.csv
-    #resource/data/count_blink.csv
-    file_name = 'C:\\Users\\dkwjd\\Desktop\\eye_blink_detector-master\\eye_blink_detector-master\\dataset\\count_blink.csv'
+    #
+    file_name = 'resource/data/count_blink.csv'
     with open(file_name, 'w', newline='') as f:
       writer = csv.writer(f)
       writer.writerows([cnt_list])

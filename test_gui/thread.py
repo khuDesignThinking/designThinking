@@ -37,10 +37,10 @@ exit_condition = True
 detector = dlib.get_frontal_face_detector()
 # 'C:\\Users\\dkwjd\\Desktop\\eye_blink_detector-master\\eye_blink_detector-master\\shape_predictor_68_face_landmarks.dat'
 # 'resource/data/shape_predictor_68_face_landmarks.dat'
-predictor = dlib.shape_predictor('shape_predictor_68_face_landmarks.dat')
+predictor = dlib.shape_predictor('resource/data/shape_predictor_68_face_landmarks.dat')
 # 'C:\\Users\\dkwjd\\Desktop\\eye_blink_detector-master\\eye_blink_detector-master\\models\\2018_12_17_22_58_35.h5'
 # 'resource/models/2018_12_17_22_58_35.h5'
-model = load_model('2018_12_17_22_58_35.h5')
+model = load_model('resource/models/2018_12_17_22_58_35.h5')
 model.summary()
 
 

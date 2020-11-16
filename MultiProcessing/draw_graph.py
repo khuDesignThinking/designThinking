@@ -1,7 +1,7 @@
 from matplotlib import pyplot as plt
 
 
-def load_source(source_directory:str = "C:\\Users\\dkwjd\\Desktop\\eye_blink_detector-master\\eye_blink_detector-master\\dataset\\count_blink.csv") -> list:
+def load_source(source_directory:str = "resource/data/count_blink.csv") -> list:
     """
     If there is no csv file, This function make count_blink.csv file
     """
@@ -19,7 +19,7 @@ def load_source(source_directory:str = "C:\\Users\\dkwjd\\Desktop\\eye_blink_det
     return int_blink_count
     
 
-def update_graph(image_directory: str = "C:\\Users\\dkwjd\\Desktop\\eye_blink_detector-master\\eye_blink_detector-master\\dataset\\graph.jpg") -> None:
+def update_graph(image_directory: str = "resource/images/graph.jpg") -> None:
     """
     This function make "resource/images/graph.jpg" file
     param: 

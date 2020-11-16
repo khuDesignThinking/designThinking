@@ -15,7 +15,7 @@ import draw_graph as dg
 
 
 class ShowVideo(QtCore.QObject):
-    image_directory = "C:\\Users\\dkwjd\\Desktop\\eye_blink_detector-master\\eye_blink_detector-master\\dataset\\graph.jpg"
+    image_directory = "resource/images/graph.jpg"
     dg.update_graph(image_directory)
 
     image = cv2.imread(image_directory, cv2.IMREAD_COLOR)

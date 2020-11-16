@@ -13,7 +13,7 @@ ValueError: invalid literal for int() with base 10: ' 12.1'
 from matplotlib import pyplot as plt
 
 
-def load_source(source_directory:str = "C:\\Users\\dkwjd\\Desktop\\디자인적사고\\designThinking\\resource\\data\\count_blink.csv") -> list:
+def load_source(source_directory:str = "resource\\data\\count_blink.csv") -> list:
     """
     If there is no csv file, This function make count_blink.csv file
     """
@@ -31,7 +31,7 @@ def load_source(source_directory:str = "C:\\Users\\dkwjd\\Desktop\\디자인적�
     return int_blink_count
     
 
-def update_graph(image_directory: str = "C:\\Users\\dkwjd\\Desktop\\디자인적사고\\designThinking\\resource\\images\\graph.jpg") -> None:
+def update_graph(image_directory: str = "resource\\images\\graph.jpg") -> None:
     """
     This function make "resource/images/graph.jpg" file
     param: 
