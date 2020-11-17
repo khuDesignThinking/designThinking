@@ -43,7 +43,7 @@ class Ui_MainWindow(object):
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(30, 20, 301, 301))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("profile.png"))
+        self.label.setPixmap(QtGui.QPixmap("resource\\image\\profile.png"))
         self.label.setObjectName("label")
         self.gender = QtWidgets.QComboBox(self.centralwidget)
         self.gender.setGeometry(QtCore.QRect(360, 40, 101, 31))
@@ -104,13 +104,13 @@ class Ui_MainWindow(object):
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(360, 230, 151, 81))
         self.label_3.setText("")
-        self.label_3.setPixmap(QtGui.QPixmap("main.png"))
+        self.label_3.setPixmap(QtGui.QPixmap("resource\\image\\main.png"))
         self.label_3.setObjectName("label_3")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(300, 290, 31, 28))
         self.pushButton.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("change.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("resource\\image\\change.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton.setIcon(icon)
         self.pushButton.setObjectName("pushButton")
         MainWindow.setCentralWidget(self.centralwidget)
@@ -181,11 +181,11 @@ class Ui_MainWindow(object):
             time.sleep(10)
             cnt_blink = thread.cnt_blink
             if(cnt_blink <=1):
-              self.label_3.setPixmap(QtGui.QPixmap("red.png"))
+              self.label_3.setPixmap(QtGui.QPixmap("resource\\image\\red.png"))
             elif(1 < cnt_blink <=3):
-              self.label_3.setPixmap(QtGui.QPixmap("yellow.png"))
+              self.label_3.setPixmap(QtGui.QPixmap("resource\\image\\yellow.png"))
             elif(cnt_blink >3):
-              self.label_3.setPixmap(QtGui.QPixmap("green.png"))
+              self.label_3.setPixmap(QtGui.QPixmap("resource\\image\\green.png"))
     def update_gp(self):
         while(True):
             time.sleep(10)

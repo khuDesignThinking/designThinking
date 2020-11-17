@@ -15,7 +15,6 @@ class kinwriter(QMainWindow, Ui_MainWindow):
 
         self.setupUi(self)
 
-
         self.show()
 
 
