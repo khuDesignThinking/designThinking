@@ -1,4 +1,5 @@
 from matplotlib import pyplot as plt
+import test_gui3 as gui
 
 
 def load_source(source_directory:str = "dataset/count_blink.csv") -> list:
@@ -38,7 +39,9 @@ def update_graph(image_directory: str = "dataset/graph.jpg") -> None:
     plt.title('Blink count')
     plt.savefig(image_directory)
     plt.close()
-    #plt.show()
+    if(len(x_list)>8):
+        del x_list[0]
+        del y_list[0]
     return None
     
 
