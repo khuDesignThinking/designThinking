@@ -21,7 +21,7 @@ def recent_blink(path:str) -> int:
     return last_index
 
 
-def control_brightness(degree: int) -> None:
+def change_brightness(degree: int) -> None:
     # brightness degree is between 0-100, Int type.
     # raise change brightness
     assert type(degree) is int
@@ -41,13 +41,13 @@ def update_bright(path: str) -> None:
     """
     blink_num = recent_blink(path)
     if 0 <= blink_num < 5:
-        control_brightness(degree = 40)
+        change_brightness(degree = 40)
     elif 5 <= blink_num < 10:
-        control_brightness(degree = 60)
+        change_brightness(degree = 60)
     elif 10 <= blink_num < 15:
-        control_brightness(degree = 80)
+        change_brightness(degree = 80)
     elif 15 <= blink_num:
-        control_brightness(degree = 100)
+        change_brightness(degree = 100)
     else:
         raise error(f"csv file value is not nomal {blink_num}")
     return None
