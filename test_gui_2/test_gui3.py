@@ -15,8 +15,8 @@ import thread
 import time
 from threading import Thread
 import GUI_main
-photo1="profile.png"
-photo2="profile2.png"
+photo1="resource\image\profile.png"
+photo2="resource\image\profile2.png"
 phototemp=""
 
 class Thread1(QThread):
@@ -45,7 +45,7 @@ class Ui_MainWindow(object):
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(30, 20, 301, 301))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("profile.png"))
+        self.label.setPixmap(QtGui.QPixmap("resource\image\profile.png"))
         self.label.setObjectName("label")
 
         self.gender = QtWidgets.QComboBox(self.centralwidget)
@@ -130,7 +130,8 @@ class Ui_MainWindow(object):
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(360, 230, 151, 81))
         self.label_3.setText("")
-        self.label_3.setPixmap(QtGui.QPixmap("main.png"))
+        self.label_3.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_3.setPixmap(QtGui.QPixmap("resource\image\Soso.png"))
         self.label_3.setObjectName("label_3")
 
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
@@ -138,7 +139,7 @@ class Ui_MainWindow(object):
         self.pushButton.setText("")
 
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("change.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("resource\image\change.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton.setIcon(icon)
         self.pushButton.setObjectName("pushButton")
 
@@ -196,6 +197,7 @@ class Ui_MainWindow(object):
         self.labDialog.setGeometry(10, 10, 341, 141)
         self.labDialog.setText("")
         self.labDialog.setObjectName("labDialog")
+        self.labDialog.setAlignment(QtCore.Qt.AlignCenter)
 
         self.btnDialog = QtWidgets.QPushButton("메인창", self.dialog)
         self.btnDialog.setGeometry(110, 180, 151, 41)
@@ -213,11 +215,11 @@ class Ui_MainWindow(object):
             time.sleep(10)
             cnt_blink = thread.cnt_blink
             if(cnt_blink <=1):
-              self.labDialog.setPixmap(QtGui.QPixmap("red.png"))
+                self.labDialog.setPixmap(QtGui.QPixmap("resource\image\Bad.png"))
             elif(1 < cnt_blink <=3):
-               self.labDialog.setPixmap(QtGui.QPixmap("yellow.png"))
+                self.labDialog.setPixmap(QtGui.QPixmap("resource\image\Soso.png"))
             elif(cnt_blink >3):
-               self.labDialog.setPixmap(QtGui.QPixmap("green.png"))
+                self.labDialog.setPixmap(QtGui.QPixmap("resource\image\Good.png"))
 
     def d_su_starter(self):
         d_x = Thread(target = self.dialog_status_update, args=())
@@ -275,11 +277,12 @@ class Ui_MainWindow(object):
             time.sleep(10)
             cnt_blink = thread.cnt_blink
             if(cnt_blink <=1):
-              self.label_3.setPixmap(QtGui.QPixmap("red.png"))
+              self.label_3.setPixmap(QtGui.QPixmap("resource\image\Bad.png"))
             elif(1 < cnt_blink <=3):
-              self.label_3.setPixmap(QtGui.QPixmap("yellow.png"))
+              self.label_3.setPixmap(QtGui.QPixmap("resource\image\Soso.png"))
             elif(cnt_blink >3):
-              self.label_3.setPixmap(QtGui.QPixmap("green.png"))
+              self.label_3.setPixmap(QtGui.QPixmap("resource\image\Good.png"))
+              
     def update_gp(self):
         while(True):
             time.sleep(10)

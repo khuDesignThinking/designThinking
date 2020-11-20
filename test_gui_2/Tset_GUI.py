@@ -1,5 +1,5 @@
 import sys
-from gui import Ui_MainWindow 
+from test_gui3 import Ui_MainWindow 
 from PyQt5 import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
