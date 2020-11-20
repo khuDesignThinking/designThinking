@@ -220,6 +220,14 @@ class Ui_MainWindow(object):
 
         self.graphic_show_btn.clicked.connect(self.show_graphic)
         self.graphic_hide_btn.clicked.connect(self.hide_graphic)
+        self.Profile_change.clicked.connect(self.change_profile)
+        self.start_btn.clicked.connect(self.select_g)
+        self.start_btn.clicked.connect(self.select_a)
+        self.start_btn.clicked.connect(self.db_starter)
+        self.start_btn.clicked.connect(self.us_starter)
+        self.start_btn.clicked.connect(self.gp_starter)
+        self.start_btn.clicked.connect(self.gp_updater)
+
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -302,6 +310,7 @@ class Ui_MainWindow(object):
         while(True):
             time.sleep(10)
             self.graphicsView.setPixmap(QtGui.QPixmap("dataset/graph.jpg"))
+
 
 app = QtWidgets.QApplication(sys.argv)
 MainWindow = QtWidgets.QMainWindow()
