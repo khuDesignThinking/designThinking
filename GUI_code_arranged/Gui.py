@@ -203,9 +203,11 @@ class Ui_MainWindow(object):
         self.label.setObjectName("label")
         self.gridLayout_5.addWidget(self.label, 0, 0, 1, 2)
         self.gridLayout_7.addWidget(self.widget_5, 0, 0, 1, 1)
+
         self.widget_6 = QtWidgets.QWidget(self.centralwidget)
         self.widget_6.setMinimumSize(QtCore.QSize(720, 480))
         self.widget_6.setObjectName("widget_6")
+
         self.gridLayout_6 = QtWidgets.QGridLayout(self.widget_6)
         self.gridLayout_6.setObjectName("gridLayout_6")
         self.graphicsView = QtWidgets.QGraphicsView(self.widget_6)

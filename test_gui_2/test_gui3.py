@@ -37,14 +37,17 @@ class Thread2(QThread):
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(747, 582)
+        MainWindow.resize(738, 428)
+
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(30, 20, 301, 301))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("resource\\image\\profile.png"))
+        self.label.setPixmap(QtGui.QPixmap("profile.png"))
         self.label.setObjectName("label")
+
         self.gender = QtWidgets.QComboBox(self.centralwidget)
         self.gender.setGeometry(QtCore.QRect(360, 40, 101, 31))
         font = QtGui.QFont()
@@ -54,6 +57,7 @@ class Ui_MainWindow(object):
         self.gender.setObjectName("gender")
         self.gender.addItem("")
         self.gender.addItem("")
+
         self.age = QtWidgets.QComboBox(self.centralwidget)
         self.age.setGeometry(QtCore.QRect(360, 110, 101, 31))
         font = QtGui.QFont()
@@ -70,6 +74,7 @@ class Ui_MainWindow(object):
         self.age.addItem("")
         self.age.addItem("")
         self.age.addItem("")
+
         self.start_btn = QtWidgets.QPushButton(self.centralwidget)
         self.start_btn.setGeometry(QtCore.QRect(520, 30, 191, 51))
         font = QtGui.QFont()
@@ -77,6 +82,7 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.start_btn.setFont(font)
         self.start_btn.setObjectName("start_btn")
+
         self.stop_btn = QtWidgets.QPushButton(self.centralwidget)
         self.stop_btn.setGeometry(QtCore.QRect(520, 100, 191, 51))
         font = QtGui.QFont()
@@ -84,16 +90,35 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.stop_btn.setFont(font)
         self.stop_btn.setObjectName("stop_btn")
-        self.graphicsView = QtWidgets.QLabel(self.centralwidget)
-        self.graphicsView.setGeometry(QtCore.QRect(30, 350, 640, 480)) # 640 * 480
-        self.graphicsView.setObjectName("graphicsView")
-        self.lineEdit_2 = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit_2.setGeometry(QtCore.QRect(560, 230, 151, 81))
+
+        self.graphic_show = QtWidgets.QPushButton("그래프 나타내기", self.centralwidget)
+        self.graphic_show.setGeometry(QtCore.QRect(552, 186, 141, 48))
         font = QtGui.QFont()
         font.setFamily("한컴 백제 B")
-        font.setPointSize(36)
-        self.lineEdit_2.setFont(font)
-        self.lineEdit_2.setObjectName("lineEdit_2")
+        font.setPointSize(12)
+        self.graphic_show.setFont(font)
+        self.graphic_show.setObjectName("graphic_show")
+
+        self.graphic_hide = QtWidgets.QPushButton("그래프 숨기기", self.centralwidget)
+        self.graphic_hide.setGeometry(QtCore.QRect(552, 240, 141, 81))
+        self.graphic_hide.setFont(font)
+        self.graphic_hide.setObjectName("graphic_hide")
+
+        self.widget = QtWidgets.QWidget(self.centralwidget)
+        self.widget.setGeometry(QtCore.QRect(9, 363, 720, 480))
+        self.widget.setObjectName("widget")
+
+        self.graphicsView = QtWidgets.QLabel(self.widget)
+        self.graphicsView.setGeometry(QtCore.QRect(9, 9, 700, 460))
+        self.graphicsView.setObjectName("graphicsView")
+        self.graphicsView.setPixmap(QtGui.QPixmap("dataset/graph.jpg"))
+
+        self.graphic_hide.setEnabled(False)
+        self.graphic_show.setEnabled(True)
+        self.widget.hide()
+        self.centralwidget.setFixedSize(738, 408)
+        MainWindow.setFixedSize(738, 428)
+
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(360, 170, 151, 51))
         font = QtGui.QFont()
@@ -101,18 +126,22 @@ class Ui_MainWindow(object):
         font.setPointSize(20)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
+
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(360, 230, 151, 81))
         self.label_3.setText("")
-        self.label_3.setPixmap(QtGui.QPixmap("resource\\image\\main.png"))
+        self.label_3.setPixmap(QtGui.QPixmap("main.png"))
         self.label_3.setObjectName("label_3")
+
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(300, 290, 31, 28))
         self.pushButton.setText("")
+
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("resource\\image\\change.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("change.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton.setIcon(icon)
         self.pushButton.setObjectName("pushButton")
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -120,6 +149,8 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+        self.dialog = QDialog()
         
         self.pushButton.clicked.connect(self.change_profile)
         self.start_btn.clicked.connect(self.select_g)
@@ -128,6 +159,69 @@ class Ui_MainWindow(object):
         self.start_btn.clicked.connect(self.us_starter)
         self.start_btn.clicked.connect(self.gp_starter)
         self.start_btn.clicked.connect(self.gp_updater)
+        self.start_btn.clicked.connect(self.dialog_open)
+        self.start_btn.clicked.connect(self.d_su_starter)
+
+        self.graphic_hide.clicked.connect(lambda: self.hide_graphic(MainWindow))
+        self.graphic_show.clicked.connect(lambda: self.show_graphic(MainWindow))
+
+    def show_graphic(self, MainWindow):
+        self.graphic_hide.setEnabled(True)
+        self.graphic_show.setEnabled(False)
+        self.widget.show()
+        self.centralwidget.setFixedSize(738, 852)
+        MainWindow.setFixedSize(738, 872)
+
+    def hide_graphic(self, MainWindow):
+        self.graphic_hide.setEnabled(False)
+        self.graphic_show.setEnabled(True)
+        self.widget.hide()
+        self.centralwidget.setFixedSize(738, 408)
+        MainWindow.setFixedSize(738, 428)
+
+    def dialog_open(self):
+        self.hide()
+        self.dialog.setWindowTitle('Dialog')
+        self.dialog.setWindowModality(Qt.ApplicationModal)
+        self.dialog.resize(363, 232)
+
+        ag = QDesktopWidget().availableGeometry()
+        sg = QDesktopWidget().screenGeometry()
+        widget = self.dialog.geometry()
+        x = ag.width() - widget.width()
+        y = 2 * ag.height() - sg.height() - widget.height()
+        self.dialog.move(x, y)
+
+        self.labDialog = QtWidgets.QLabel(self.dialog)
+        self.labDialog.setGeometry(10, 10, 341, 141)
+        self.labDialog.setText("")
+        self.labDialog.setObjectName("labDialog")
+
+        self.btnDialog = QtWidgets.QPushButton("메인창", self.dialog)
+        self.btnDialog.setGeometry(110, 180, 151, 41)
+        self.btnDialog.setObjectName("btnDialog")
+        self.btnDialog.clicked.connect(self.dialog_close)
+
+        self.dialog.show()
+
+    def dialog_close(self):
+        self.dialog.close()
+        self.show()
+
+    def dialog_status_update(self):
+        while(True):
+            time.sleep(10)
+            cnt_blink = thread.cnt_blink
+            if(cnt_blink <=1):
+              self.labDialog.setPixmap(QtGui.QPixmap("red.png"))
+            elif(1 < cnt_blink <=3):
+               self.labDialog.setPixmap(QtGui.QPixmap("yellow.png"))
+            elif(cnt_blink >3):
+               self.labDialog.setPixmap(QtGui.QPixmap("green.png"))
+
+    def d_su_starter(self):
+        d_x = Thread(target = self.dialog_status_update, args=())
+        d_x.start()
 
     def db_starter(self):
         x = Thread1(self)
@@ -181,11 +275,11 @@ class Ui_MainWindow(object):
             time.sleep(10)
             cnt_blink = thread.cnt_blink
             if(cnt_blink <=1):
-              self.label_3.setPixmap(QtGui.QPixmap("resource\\image\\red.png"))
+              self.label_3.setPixmap(QtGui.QPixmap("red.png"))
             elif(1 < cnt_blink <=3):
-              self.label_3.setPixmap(QtGui.QPixmap("resource\\image\\yellow.png"))
+              self.label_3.setPixmap(QtGui.QPixmap("yellow.png"))
             elif(cnt_blink >3):
-              self.label_3.setPixmap(QtGui.QPixmap("resource\\image\\green.png"))
+              self.label_3.setPixmap(QtGui.QPixmap("green.png"))
     def update_gp(self):
         while(True):
             time.sleep(10)
