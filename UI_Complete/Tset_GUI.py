@@ -18,7 +18,6 @@ class kinwriter(QMainWindow, Ui_MainWindow):
         self.show()
 
 
-
 app = QApplication([])
 sn = kinwriter()
 QApplication.processEvents()

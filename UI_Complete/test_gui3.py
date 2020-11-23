@@ -83,16 +83,16 @@ class Ui_MainWindow(object):
         self.start_btn.setFont(font)
         self.start_btn.setObjectName("start_btn")
 
-        self.stop_btn = QtWidgets.QPushButton(self.centralwidget)
-        self.stop_btn.setGeometry(QtCore.QRect(520, 100, 191, 51))
+        self.brightness_check = QtWidgets.QCheckBox(self.centralwidget)
+        self.brightness_check.setGeometry(QtCore.QRect(520, 100, 191, 51))
         font = QtGui.QFont()
         font.setFamily("한컴 백제 B")
-        font.setPointSize(12)
-        self.stop_btn.setFont(font)
-        self.stop_btn.setObjectName("stop_btn")
+        font.setPointSize(15)
+        self.brightness_check.setFont(font)
+        self.brightness_check.setObjectName("brightness_check")
 
         self.graphic_show = QtWidgets.QPushButton("그래프 나타내기", self.centralwidget)
-        self.graphic_show.setGeometry(QtCore.QRect(552, 186, 141, 48))
+        self.graphic_show.setGeometry(QtCore.QRect(552, 186, 141, 50))
         font = QtGui.QFont()
         font.setFamily("한컴 백제 B")
         font.setPointSize(12)
@@ -100,7 +100,7 @@ class Ui_MainWindow(object):
         self.graphic_show.setObjectName("graphic_show")
 
         self.graphic_hide = QtWidgets.QPushButton("그래프 숨기기", self.centralwidget)
-        self.graphic_hide.setGeometry(QtCore.QRect(552, 240, 141, 81))
+        self.graphic_hide.setGeometry(QtCore.QRect(552, 240, 141, 50))
         self.graphic_hide.setFont(font)
         self.graphic_hide.setObjectName("graphic_hide")
 
@@ -199,7 +199,7 @@ class Ui_MainWindow(object):
         self.labDialog.setObjectName("labDialog")
         self.labDialog.setAlignment(QtCore.Qt.AlignCenter)
 
-        self.btnDialog = QtWidgets.QPushButton("메인창", self.dialog)
+        self.btnDialog = QtWidgets.QPushButton("측정 중지", self.dialog)
         self.btnDialog.setGeometry(110, 180, 151, 41)
         self.btnDialog.setObjectName("btnDialog")
         self.btnDialog.clicked.connect(self.dialog_close)
@@ -252,7 +252,7 @@ class Ui_MainWindow(object):
         self.age.setItemText(7, _translate("MainWindow", "80대"))
         self.age.setItemText(8, _translate("MainWindow", "90대"))
         self.start_btn.setText(_translate("MainWindow", "측정 시작"))
-        self.stop_btn.setText(_translate("MainWindow", "측정 중지"))
+        self.brightness_check.setText(_translate("MainWindow", "화면밝기 자동 조정"))
         self.label_2.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\">현재 상태</p></body></html>"))
     
     def change_profile(self):
