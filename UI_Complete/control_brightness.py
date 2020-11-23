@@ -54,7 +54,7 @@ def update_bright(path: str) -> None:
 
 
 def main():
-    update_bright(path = "resource/data/count_blink.csv")
+    update_bright(path = "dataset/count_blink.csv")
 
 if __name__ == "__main__":
     main()

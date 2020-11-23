@@ -15,6 +15,7 @@ import thread
 import time
 from threading import Thread
 import GUI_main
+import control_brightness as bright
 photo1="resource\image\profile.png"
 photo2="resource\image\profile2.png"
 phototemp=""
@@ -162,17 +163,17 @@ class Ui_MainWindow(object):
         self.start_btn.clicked.connect(self.gp_updater)
         self.start_btn.clicked.connect(self.dialog_open)
         self.start_btn.clicked.connect(self.d_su_starter)
-        self.start_btn.clicked.connect(self.check_brightness_auto)
 
 
         self.graphic_hide.clicked.connect(lambda: self.hide_graphic(MainWindow))
         self.graphic_show.clicked.connect(lambda: self.show_graphic(MainWindow))
 
     def check_brightness_auto(self):
-        if self.brightness_check.isChecked()==True:
-            return True
+        if self.brightness_check.isChecked():
+            bright.update_bright(path = "dataset/count_blink.csv")
+            return None
         else:
-            return False
+            return None
 
 
     def show_graphic(self, MainWindow):
@@ -222,6 +223,7 @@ class Ui_MainWindow(object):
     def dialog_status_update(self):
         while(True):
             time.sleep(10)
+            self.check_brightness_auto()
             cnt_blink = thread.cnt_blink
             if(cnt_blink <=1):
                 self.labDialog.setPixmap(QtGui.QPixmap("resource\image\Bad.png"))
