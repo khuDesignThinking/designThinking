@@ -162,9 +162,18 @@ class Ui_MainWindow(object):
         self.start_btn.clicked.connect(self.gp_updater)
         self.start_btn.clicked.connect(self.dialog_open)
         self.start_btn.clicked.connect(self.d_su_starter)
+        self.start_btn.clicked.connect(self.check_brightness_auto)
+
 
         self.graphic_hide.clicked.connect(lambda: self.hide_graphic(MainWindow))
         self.graphic_show.clicked.connect(lambda: self.show_graphic(MainWindow))
+
+    def check_brightness_auto(self):
+        if self.brightness_check.isChecked()==True:
+            return True
+        else:
+            return False
+
 
     def show_graphic(self, MainWindow):
         self.graphic_hide.setEnabled(True)
