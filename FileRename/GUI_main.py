@@ -16,6 +16,7 @@ import time
 import source
 from threading import Thread
 import GUI_graph
+import control_brightness as bright
 photo1="resource/image/profile.png"
 photo2="resource/image/profile2.png"
 phototemp=""
@@ -214,7 +215,7 @@ class Ui_MainWindow(object):
         while(not countBlink.exit_condition):
             time.sleep(10)
             cnt_blink = countBlink.cnt_blink
-            if (self.gender.currentText() == "남성" || self.age.currentText() == "청소년"):
+            if (self.gender.currentText() == "남성" or self.age.currentText() == "청소년"):
                 if(cnt_blink <=1):
                     self.labDialog.setPixmap(QtGui.QPixmap("resource/image/bad.png"))
                 elif(1 < cnt_blink <=3):
@@ -263,6 +264,14 @@ class Ui_MainWindow(object):
         photo1=photo2
         photo2=phototemp
     
+
+    def bright_contrl(self):
+        if self.brightness_check.isChecked():
+            bright.update_bright(path = "dataset/count_blink.csv")
+        else:
+            pass
+
+
     def select_g(self):
         global gender
         gender=self.gender.currentText()
@@ -276,6 +285,7 @@ class Ui_MainWindow(object):
     def update_status(self):
         while(not countBlink.exit_condition):
             time.sleep(10)
+            self.bright_contrl()
             cnt_blink = countBlink.cnt_blink
             if (self.gender.currentText() == "남성"):
                 if(cnt_blink <=1):
