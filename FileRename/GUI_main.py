@@ -16,7 +16,6 @@ import time
 import source
 from threading import Thread
 import GUI_graph
-import control_brightness as bright
 photo1="resource/image/profile.png"
 photo2="resource/image/profile2.png"
 phototemp=""
@@ -39,19 +38,13 @@ class Thread2(QThread):
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(738, 428)
+        MainWindow.resize(310, 232)
 
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
-        self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(30, 20, 301, 301))
-        self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("resource/image/profile.png"))
-        self.label.setObjectName("label")
-
         self.gender = QtWidgets.QComboBox(self.centralwidget)
-        self.gender.setGeometry(QtCore.QRect(360, 40, 101, 31))
+        self.gender.setGeometry(QtCore.QRect(19, 19, 134, 20))
         font = QtGui.QFont()
         font.setFamily("한컴 백제 M")
         font.setPointSize(10)
@@ -61,7 +54,7 @@ class Ui_MainWindow(object):
         self.gender.addItem("")
 
         self.age = QtWidgets.QComboBox(self.centralwidget)
-        self.age.setGeometry(QtCore.QRect(360, 110, 101, 31))
+        self.age.setGeometry(QtCore.QRect(19, 45, 134, 20))
         font = QtGui.QFont()
         font.setFamily("한컴 백제 M")
         font.setPointSize(10)
@@ -71,7 +64,7 @@ class Ui_MainWindow(object):
         self.age.addItem("")
 
         self.start_btn = QtWidgets.QPushButton(self.centralwidget)
-        self.start_btn.setGeometry(QtCore.QRect(520, 30, 191, 51))
+        self.start_btn.setGeometry(QtCore.QRect(159, 19, 133, 46))
         font = QtGui.QFont()
         font.setFamily("한컴 백제 B")
         font.setPointSize(12)
@@ -79,15 +72,26 @@ class Ui_MainWindow(object):
         self.start_btn.setObjectName("start_btn")
 
         self.brightness_check = QtWidgets.QCheckBox(self.centralwidget)
-        self.brightness_check.setGeometry(QtCore.QRect(520, 100, 191, 51))
+        self.brightness_check.setGeometry(QtCore.QRect(28, 84, 125, 16))
         font = QtGui.QFont()
         font.setFamily("한컴 백제 B")
-        font.setPointSize(15)
+        font.setPointSize(9)
         self.brightness_check.setFont(font)
         self.brightness_check.setObjectName("brightness_check")
 
+        self.sound_alarm = QtWidgets.QCheckBox("음성 알리미 키기", self.centralwidget)
+        self.sound_alarm.setGeometry(QtCore.QRect(28, 114, 125, 16))
+        self.sound_alarm.setFont(font)
+        self.sound_alarm.setObjectName("sound_alarm")
+
+        self.manual = QtWidgets.QPushButton("눈 건강 매뉴얼", self.centralwidget)
+        self.manual.setGeometry(QtCore.QRect(28, 140, 255, 63))
+        font.setPointSize(12)
+        self.manual.setFont(font)
+        self.manual.setObjectName("manual")
+
         self.graphic_show = QtWidgets.QPushButton("그래프 나타내기", self.centralwidget)
-        self.graphic_show.setGeometry(QtCore.QRect(552, 186, 141, 50))
+        self.graphic_show.setGeometry(QtCore.QRect(159, 80, 124, 24))
         font = QtGui.QFont()
         font.setFamily("한컴 백제 B")
         font.setPointSize(12)
@@ -95,7 +99,7 @@ class Ui_MainWindow(object):
         self.graphic_show.setObjectName("graphic_show")
 
         self.graphic_hide = QtWidgets.QPushButton("그래프 숨기기", self.centralwidget)
-        self.graphic_hide.setGeometry(QtCore.QRect(552, 240, 141, 81))
+        self.graphic_hide.setGeometry(QtCore.QRect(159, 110, 124, 24))
         self.graphic_hide.setFont(font)
         self.graphic_hide.setObjectName("graphic_hide")
 
@@ -111,31 +115,6 @@ class Ui_MainWindow(object):
         self.graphic_hide.setEnabled(False)
         self.graphic_show.setEnabled(True)
         self.widget.hide()
-        self.centralwidget.setFixedSize(738, 408)
-        MainWindow.setFixedSize(738, 428)
-
-        self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(360, 170, 151, 51))
-        font = QtGui.QFont()
-        font.setFamily("한컴 백제 B")
-        font.setPointSize(20)
-        self.label_2.setFont(font)
-        self.label_2.setObjectName("label_2")
-
-        self.label_3 = QtWidgets.QLabel(self.centralwidget)
-        self.label_3.setGeometry(QtCore.QRect(360, 230, 151, 81))
-        self.label_3.setText("")
-        self.label_3.setPixmap(QtGui.QPixmap("resource/image/main.png"))
-        self.label_3.setObjectName("label_3")
-
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(300, 290, 31, 28))
-        self.pushButton.setText("")
-
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("resource/image/change.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pushButton.setIcon(icon)
-        self.pushButton.setObjectName("pushButton")
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -145,18 +124,36 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        icon = QtGui.QIcon("resource/image/icon.png")
+
+        self.tray = QtWidgets.QSystemTrayIcon()
+        self.tray.setIcon(icon)
+        self.tray.setVisible(False)
+
+        self.menu = QtWidgets.QMenu()
+        self.quit = QtWidgets.QAction("측정종료")
+        self.menu.addAction(self.quit)
+        self.tray.setContextMenu(self.menu)
+        self.quit.triggered.connect(self.tray_close)
+
         self.dialog = QDialog()
-        
-        self.pushButton.clicked.connect(self.change_profile)
+
+        self.dialog.setWindowTitle('Dialog')
+        self.dialog.resize(643, 483)
+        self.dialog_graphic = QtWidgets.QLabel(self.dialog)
+        self.dialog_graphic.setGeometry(3, 3, 643, 483)
+        self.dialog_graphic.setText("")
+        self.dialog_graphic.setObjectName("dialog_graphic")
+        self.dialog_graphic.setPixmap(QtGui.QPixmap("dataset/graph.jpg"))
+        self.dialog.move(300,300)
+
         self.start_btn.clicked.connect(self.ready_start)
         self.start_btn.clicked.connect(self.select_g)
         self.start_btn.clicked.connect(self.select_a)
         self.start_btn.clicked.connect(self.db_starter)
-        self.start_btn.clicked.connect(self.us_starter)
         self.start_btn.clicked.connect(self.gp_starter)
         self.start_btn.clicked.connect(self.gp_updater)
-        self.start_btn.clicked.connect(self.dialog_open)
-        self.start_btn.clicked.connect(self.d_su_starter)
+        self.start_btn.clicked.connect(self.tray_open)
 
         self.graphic_hide.clicked.connect(lambda: self.hide_graphic(MainWindow))
         self.graphic_show.clicked.connect(lambda: self.show_graphic(MainWindow))
@@ -168,78 +165,26 @@ class Ui_MainWindow(object):
     def show_graphic(self, MainWindow):
         self.graphic_hide.setEnabled(True)
         self.graphic_show.setEnabled(False)
-        self.widget.show()
-        self.centralwidget.setFixedSize(738, 852)
-        MainWindow.setFixedSize(738, 872)
+        self.dialog.show()
 
     def hide_graphic(self, MainWindow):
         self.graphic_hide.setEnabled(False)
         self.graphic_show.setEnabled(True)
-        self.widget.hide()
-        self.centralwidget.setFixedSize(738, 408)
-        MainWindow.setFixedSize(738, 428)
+        self.dialog.hide()
 
-    def dialog_open(self):
+    def tray_open(self):
         self.hide()
-        self.dialog.setWindowTitle('Dialog')
-        self.dialog.setWindowModality(Qt.ApplicationModal)
-        self.dialog.resize(363, 232)
+        self.tray.setVisible(True)
 
-        ag = QDesktopWidget().availableGeometry()
-        sg = QDesktopWidget().screenGeometry()
-        widget = self.dialog.geometry()
-        x = ag.width() - widget.width()
-        y = 2 * ag.height() - sg.height() - widget.height()
-        self.dialog.move(x, y)
-
-        self.labDialog = QtWidgets.QLabel(self.dialog)
-        self.labDialog.setGeometry(10, 10, 341, 141)
-        self.labDialog.setText("")
-        self.labDialog.setObjectName("labDialog")
-        self.labDialog.setAlignment(QtCore.Qt.AlignCenter)
-
-        self.btnDialog = QtWidgets.QPushButton("측정 종료", self.dialog)
-        self.btnDialog.setGeometry(110, 180, 151, 41)
-        self.btnDialog.setObjectName("btnDialog")
-        self.btnDialog.clicked.connect(self.dialog_close)
-
-        self.dialog.show()
-
-    def dialog_close(self):
+    def tray_close(self):
         countBlink.exit_condition = True
         Thread2.vid.stopVideo()
-        self.dialog.close()
+        self.tray.setVisible(False)
         self.show()
-
-    def dialog_status_update(self):
-        while(not countBlink.exit_condition):
-            time.sleep(10)
-            cnt_blink = countBlink.cnt_blink
-            if (self.gender.currentText() == "남성" or self.age.currentText() == "청소년"):
-                if(cnt_blink <=1):
-                    self.labDialog.setPixmap(QtGui.QPixmap("resource/image/bad.png"))
-                elif(1 < cnt_blink <=3):
-                    self.labDialog.setPixmap(QtGui.QPixmap("resource/image/Soso.png"))
-                elif(cnt_blink >3):
-                    self.labDialog.setPixmap(QtGui.QPixmap("resource/image/Good.png"))
-            else:
-                if(cnt_blink <=2):
-                    self.labDialog.setPixmap(QtGui.QPixmap("resource/image/bad.png"))
-                elif(2 < cnt_blink <=5):
-                    self.labDialog.setPixmap(QtGui.QPixmap("resource/image/Soso.png"))
-                elif(cnt_blink >5):
-                    self.labDialog.setPixmap(QtGui.QPixmap("resource/image/Good.png"))
-
-    def d_su_starter(self):
-        d_x = Thread(target = self.dialog_status_update, args=())
-        d_x.start()
 
     def db_starter(self):
         x = Thread1(self)
         x.start()
-    def us_starter(self):
-        y = Thread(target = self.update_status, args=())
-        y.start()
     def gp_starter(self):
         z = Thread2(self)
         z.start()
@@ -255,23 +200,7 @@ class Ui_MainWindow(object):
         self.age.setItemText(1, _translate("MainWindow", "성인"))
         self.start_btn.setText(_translate("MainWindow", "측정 시작"))
         self.brightness_check.setText(_translate("MainWindow", "화면 밝기 자동 조정"))
-        self.label_2.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\">현재 상태</p></body></html>"))
     
-    def change_profile(self):
-        global photo1, photo2, phototemp
-        self.label.setPixmap(QtGui.QPixmap(photo2))
-        phototemp=photo1
-        photo1=photo2
-        photo2=phototemp
-    
-
-    def bright_contrl(self):
-        if self.brightness_check.isChecked():
-            bright.update_bright(path = "dataset/count_blink.csv")
-        else:
-            pass
-
-
     def select_g(self):
         global gender
         gender=self.gender.currentText()
@@ -281,30 +210,11 @@ class Ui_MainWindow(object):
         global age
         age=self.age.currentText()
         print(self.age.currentText())
-        
-    def update_status(self):
-        while(not countBlink.exit_condition):
-            time.sleep(10)
-            self.bright_contrl()
-            cnt_blink = countBlink.cnt_blink
-            if (self.gender.currentText() == "남성"):
-                if(cnt_blink <=1):
-                    self.label_3.setPixmap(QtGui.QPixmap("resource/image/bad.png"))
-                elif(1 < cnt_blink <=3):
-                    self.label_3.setPixmap(QtGui.QPixmap("resource/image/Soso.png"))
-                elif(cnt_blink >3):
-                    self.label_3.setPixmap(QtGui.QPixmap("resource/image/Good.png"))
-            else:
-                if(cnt_blink <=2):
-                    self.label_3.setPixmap(QtGui.QPixmap("resource/image/bad.png"))
-                elif(2 < cnt_blink <=5):
-                    self.label_3.setPixmap(QtGui.QPixmap("resource/image/Soso.png"))
-                elif(cnt_blink >5):
-                    self.label_3.setPixmap(QtGui.QPixmap("resource/image/Good.png"))
+
     def update_gp(self):
         while(not countBlink.exit_condition):
             time.sleep(10)
-            self.graphicsView.setPixmap(QtGui.QPixmap("dataset/graph.jpg"))
+            self.dialog_graphic.setPixmap(QtGui.QPixmap("dataset/graph.jpg"))
 
 
 if __name__ == "__main__":
