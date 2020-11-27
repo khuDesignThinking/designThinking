@@ -1,6 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
+from PyQt5.QtWebEngineWidgets import *
 import countBlink
 import time
 import csv
@@ -108,6 +109,9 @@ class Ui_MainWindow(object):
         self.tray.setContextMenu(self.menu)
         self.quit.triggered.connect(self.tray_close)
 
+        #눈건강 info에 이용
+        self.dialog2 = QDialog()
+
         #그래프 나타내기에 이용
         self.dialog = QDialog()
         self.dialog.setWindowTitle('BlinkCount Graph')
@@ -135,9 +139,9 @@ class Ui_MainWindow(object):
         self.start_btn.clicked.connect(self.gp_updater)# 3
                                             #수정함
         self.start_btn.clicked.connect(self.dialogCur_open)
-        
 
         self.graphic_show.clicked.connect(lambda: self.show_graphic(MainWindow))
+        self.manual.clicked.connect(self.dialogInfo_open)
 
     def ready_start(self):
         countBlink.exit_condition = False
@@ -251,7 +255,53 @@ class Ui_MainWindow(object):
         while(not countBlink.exit_condition):
             time.sleep(10)
             self.dialog_graphic.setPixmap(QtGui.QPixmap("dataset/graph.jpg"))
+    
+    def dialogInfo_open(self):
+        #self.hide()
+        self.dialog2.setObjectName("Dialog2")
+        self.dialog2.resize(698, 529)
+        self.dialog2.setWindowTitle("눈건강 INFO")
+        self.tabWidget = QtWidgets.QTabWidget(self.dialog2)
+        self.tabWidget.setGeometry(QtCore.QRect(10, 10, 681, 511))
+        self.tabWidget.setTabShape(QtWidgets.QTabWidget.Rounded)
+        self.tabWidget.setMovable(False)
+        self.tabWidget.setTabBarAutoHide(False)
+        self.tabWidget.setObjectName("tabWidget")
 
+        self.tab = QtWidgets.QWidget(self.dialog2)
+        self.tab.setObjectName("tab")
+        self.widget_2 = QtWidgets.QWidget(self.tab)
+        self.widget_2.setGeometry(QtCore.QRect(10, 10, 661, 471))
+        self.widget_2.setObjectName("widget_2")
+        self.tabWidget.addTab(self.tab, "눈 운동방법")
+
+        self.tab_2 = QtWidgets.QWidget()
+        self.tab_2.setObjectName("tab_2")
+        self.widget = QtWidgets.QWidget(self.tab_2)
+        self.widget.setGeometry(QtCore.QRect(10, 10, 661, 471))
+        self.widget.setObjectName("widget")
+        self.tabWidget.addTab(self.tab_2, "겨울철 눈 건강 지키기")
+        ### 더 추가 하고 싶은 부분은 이만큼 복붙해서 이름 바꾸면 됩니다.
+        self.tab_3 = QtWidgets.QWidget()
+        self.tab_3.setObjectName("tab_3")
+        self.widget_3=QtWidgets.QWidget(self.tab_3)
+        self.widget_3.setGeometry(QtCore.QRect(10, 10, 661, 471))
+        self.widget_3.setObjectName("widget_3")
+        self.tabWidget.addTab(self.tab_3, "눈에 좋은 음식과 해로운 음식")
+        ### 
+        self.tabweb_1=QWebEngineView(self.widget)
+        self.tabweb_2=QWebEngineView(self.widget_2)
+        self.tabweb_3=QWebEngineView(self.widget_3)
+        ###위에줄에도 추가한 항목 추가
+        self.tabweb_1.setUrl(QUrl("https://blog.yonseibon.co.kr/life/%ea%b2%a8%ec%9a%b8%ec%b2%a0-%eb%88%88-%ea%b1%b4%ea%b0%95%ec%97%90-%ec%a2%8b%ec%a7%80-%ec%95%8a%ec%9d%80-%ec%83%9d%ed%99%9c%ec%8a%b5%ea%b4%80/"))
+        self.tabweb_2.setUrl(QUrl("https://steptohealth.co.kr/7-exercise-for-your-eyes/"))
+        self.tabweb_3.setUrl(QUrl("http://www.samsunghospital.com/upload/health/1438754922163_234165.jpg"))
+        ###위에줄에도 추가한 항목 추가
+        self.tabweb_1.setGeometry(QtCore.QRect(10, 10, 661, 471))
+        self.tabweb_2.setGeometry(QtCore.QRect(10, 10, 661, 471))
+        self.tabweb_3.setGeometry(QtCore.QRect(10, 10, 661, 471))
+        ###위에줄에도 추가한 항목 추가
+        self.dialog2.show()
 
 if __name__ == "__main__":
     import sys
