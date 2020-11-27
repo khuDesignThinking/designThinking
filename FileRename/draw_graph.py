@@ -1,5 +1,5 @@
 from matplotlib import pyplot as plt
-import GUI_main as gui
+import gui_testtemp as gui
 
 
 def load_source(source_directory:str = "dataset/count_blink.csv"):
