@@ -270,16 +270,16 @@ class Ui_MainWindow(object):
 
         self.tab = QtWidgets.QWidget(self.dialog2)
         self.tab.setObjectName("tab")
-        self.widget_2 = QtWidgets.QWidget(self.tab)
-        self.widget_2.setGeometry(QtCore.QRect(10, 10, 661, 471))
-        self.widget_2.setObjectName("widget_2")
+        self.widget = QtWidgets.QWidget(self.tab)
+        self.widget.setGeometry(QtCore.QRect(10, 10, 661, 471))
+        self.widget.setObjectName("widget_2")
         self.tabWidget.addTab(self.tab, "눈 운동방법")
 
         self.tab_2 = QtWidgets.QWidget()
         self.tab_2.setObjectName("tab_2")
-        self.widget = QtWidgets.QWidget(self.tab_2)
-        self.widget.setGeometry(QtCore.QRect(10, 10, 661, 471))
-        self.widget.setObjectName("widget")
+        self.widget_2 = QtWidgets.QWidget(self.tab_2)
+        self.widget_2.setGeometry(QtCore.QRect(10, 10, 661, 471))
+        self.widget_2.setObjectName("widget")
         self.tabWidget.addTab(self.tab_2, "겨울철 눈 건강 지키기")
         ### 더 추가 하고 싶은 부분은 이만큼 복붙해서 이름 바꾸면 됩니다.
         self.tab_3 = QtWidgets.QWidget()
@@ -290,11 +290,24 @@ class Ui_MainWindow(object):
         self.tabWidget.addTab(self.tab_3, "눈에 좋은 음식과 해로운 음식")
         ### 
         self.tabweb_1=QWebEngineView(self.widget)
-        self.tabweb_2=QWebEngineView(self.widget_2)
-        self.tabweb_3=QWebEngineView(self.widget_3)
-        ###위에줄에도 추가한 항목 추가
+        profile = QWebEngineProfile(self.tabweb_1)
+        profile.setHttpUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36")
+        page = QWebEnginePage(profile, self.tabweb_1)
+        self.tabweb_1.setPage(page)
         self.tabweb_1.setUrl(QUrl("https://blog.yonseibon.co.kr/life/%ea%b2%a8%ec%9a%b8%ec%b2%a0-%eb%88%88-%ea%b1%b4%ea%b0%95%ec%97%90-%ec%a2%8b%ec%a7%80-%ec%95%8a%ec%9d%80-%ec%83%9d%ed%99%9c%ec%8a%b5%ea%b4%80/"))
+        ###
+        self.tabweb_2=QWebEngineView(self.widget_2)
+        profile = QWebEngineProfile(self.tabweb_2)
+        profile.setHttpUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36")
+        page = QWebEnginePage(profile, self.tabweb_2)
+        self.tabweb_2.setPage(page)
         self.tabweb_2.setUrl(QUrl("https://steptohealth.co.kr/7-exercise-for-your-eyes/"))
+        ###
+        self.tabweb_3=QWebEngineView(self.widget_3)
+        profile = QWebEngineProfile(self.tabweb_3)
+        profile.setHttpUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36")
+        page = QWebEnginePage(profile, self.tabweb_3)
+        self.tabweb_3.setPage(page)
         self.tabweb_3.setUrl(QUrl("http://www.samsunghospital.com/upload/health/1438754922163_234165.jpg"))
         ###위에줄에도 추가한 항목 추가
         self.tabweb_1.setGeometry(QtCore.QRect(10, 10, 661, 471))
