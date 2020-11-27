@@ -2,6 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtWebEngineWidgets import *
+from PyQt5.QtGui import *
 import countBlink
 import time
 import csv
@@ -33,6 +34,11 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
+        img = QImage("resource/image/backgroundColor.jpg")
+        palette = QPalette()
+        palette.setBrush(10,QBrush(img))
+        MainWindow.setPalette(palette)
+
         self.gender = QtWidgets.QComboBox(self.centralwidget)
         self.gender.setGeometry(QtCore.QRect(19, 19, 134, 20))
         font = QtGui.QFont()
@@ -42,6 +48,7 @@ class Ui_MainWindow(object):
         self.gender.setObjectName("gender")
         self.gender.addItem("")
         self.gender.addItem("")
+        self.gender.setStyleSheet("background-color: rgb(255,255,255);font: bold 14px;")
 
         self.age = QtWidgets.QComboBox(self.centralwidget)
         self.age.setGeometry(QtCore.QRect(19, 45, 134, 20))
@@ -52,6 +59,7 @@ class Ui_MainWindow(object):
         self.age.setObjectName("age")
         self.age.addItem("")
         self.age.addItem("")
+        self.age.setStyleSheet("background-color: rgb(255,255,255);font: bold 14px;")
 
         self.start_btn = QtWidgets.QPushButton(self.centralwidget)
         self.start_btn.setGeometry(QtCore.QRect(159, 19, 133, 46))
@@ -60,36 +68,41 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.start_btn.setFont(font)
         self.start_btn.setObjectName("start_btn")
+        self.start_btn.setStyleSheet("background-color: rgb(255,255,255); border-style: outset;    border-width: 2px;    border-radius: 7px;    font: bold 14px;")
 
         self.brightness_check = QtWidgets.QCheckBox(self.centralwidget)
-        self.brightness_check.setGeometry(QtCore.QRect(28, 84, 125, 16))
+        self.brightness_check.setGeometry(QtCore.QRect(20, 84, 125, 16))
         font = QtGui.QFont()
         font.setFamily("한컴 백제 B")
         font.setPointSize(9)
         self.brightness_check.setFont(font)
         self.brightness_check.setObjectName("brightness_check")
-
+        self.brightness_check.setStyleSheet("font : bold 14px")
+        
         self.sound_alarm = QtWidgets.QCheckBox("음성 알림", self.centralwidget)
-        self.sound_alarm.setGeometry(QtCore.QRect(28, 114, 125, 16))
+        self.sound_alarm.setGeometry(QtCore.QRect(20, 114, 125, 16))
         self.sound_alarm.setFont(font)
         self.sound_alarm.setObjectName("sound_alarm")
+        self.sound_alarm.setStyleSheet("font : bold 14px")
 
         #눈건강 메뉴얼 
         self.manual = QtWidgets.QPushButton("눈건강 info", self.centralwidget)
-        self.manual.setGeometry(QtCore.QRect(159, 110, 124, 24))
-        font.setPointSize(10)
+        self.manual.setGeometry(QtCore.QRect(159, 110, 133, 24))
+        font.setPointSize(9)
         self.manual.setFont(font)
         self.manual.setObjectName("manual")
+        self.manual.setStyleSheet("background-color: rgb(180,197,222); border-style: outset;    border-width: 2px;    border-radius: 7px;    font: bold 14px;")
 
         self.graphic_show = QtWidgets.QPushButton("그래프 나타내기", self.centralwidget)
-        self.graphic_show.setGeometry(QtCore.QRect(159, 80, 124, 24))
+        self.graphic_show.setGeometry(QtCore.QRect(159, 80, 133, 24))
         font = QtGui.QFont()
         font.setFamily("한컴 백제 B")
-        font.setPointSize(10)
+        font.setPointSize(9)
         self.graphic_show.setFont(font)
         self.graphic_show.setObjectName("graphic_show")
         self.graphic_show.setEnabled(True)
-
+        self.graphic_show.setStyleSheet("background-color: rgb(219,214,239); border-style: outset;    border-width: 2px;    border-radius: 7px;    font: bold 14px;")        
+        
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -137,12 +150,12 @@ class Ui_MainWindow(object):
         self.start_btn.clicked.connect(self.d_su_starter) # 2
         self.start_btn.clicked.connect(self.gp_starter) # 3
         self.start_btn.clicked.connect(self.gp_updater)# 3
-                                            #수정함
+
         self.start_btn.clicked.connect(self.dialogCur_open)
 
         self.graphic_show.clicked.connect(lambda: self.show_graphic(MainWindow))
         self.manual.clicked.connect(self.dialogInfo_open)
-
+    
     def ready_start(self):
         countBlink.exit_condition = False
         time.sleep(0.1)
@@ -210,8 +223,9 @@ class Ui_MainWindow(object):
             bright.update_bright(path = "dataset/count_blink.csv")
         else:
             pass   
+    
     def tray_open(self):
-        self.hide()
+        #self.hide()
         self.tray.setVisible(True)
 
     def tray_close(self):
@@ -219,6 +233,7 @@ class Ui_MainWindow(object):
         Thread2.vid.stopVideo()
         self.tray.setVisible(False)
         self.show()
+    
     def d_su_starter(self):
         d_x = Thread(target = self.dialogCur_status_update__fileAdd, args=())
         d_x.start()
@@ -231,6 +246,7 @@ class Ui_MainWindow(object):
     def gp_updater(self):
         w = Thread(target = self.update_gp, args=())
         w.start()
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "EyeProtector"))
@@ -239,7 +255,7 @@ class Ui_MainWindow(object):
         self.age.setItemText(0, _translate("MainWindow", "청소년"))
         self.age.setItemText(1, _translate("MainWindow", "성인"))
         self.start_btn.setText(_translate("MainWindow", "측정 시작"))
-        self.brightness_check.setText(_translate("MainWindow", "화면 밝기 자동 조정"))
+        self.brightness_check.setText(_translate("MainWindow", "화면 밝기 조정"))
     
     def select_g(self):
         global gender
