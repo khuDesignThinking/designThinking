@@ -1,17 +1,7 @@
-"""
-2020/11/20
-HeeSung Kim
-This module control brightness of window
-
-!!CAUTION!!
-before start, go termial and load
-pip install wmi
-"""
-
 from os import error
 import wmi
 
-def recent_blink(path:str) -> int:
+def recent_blink(path:str):
     # read recent blink number in path csv file
     with open(path, "r") as f:
         data = f.read()
@@ -21,7 +11,7 @@ def recent_blink(path:str) -> int:
     return last_index
 
 
-def change_brightness(degree: int) -> None:
+def change_brightness(degree: int):
     # brightness degree is between 0-100, Int type.
     # raise change brightness
     assert type(degree) is int
@@ -29,7 +19,7 @@ def change_brightness(degree: int) -> None:
     return None
 
 
-def update_bright(path: str) -> None:
+def update_bright(path: str):
     """
     경계값(threshold) 분당 눈 감기는 횟수
     0-4 : 40

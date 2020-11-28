@@ -2,14 +2,7 @@ import cv2, dlib
 import numpy as np
 from imutils import face_utils
 from keras.models import load_model
-import time
 import csv
-
-cnt_blink=0
-start_time=0
-curr_time=0
-end_time=0
-
 
 def crop_eye(gray, img, eye_points):
       x1, y1 = np.amin(eye_points, axis=0)
@@ -32,8 +25,7 @@ def crop_eye(gray, img, eye_points):
 
 IMG_SIZE = (34, 26)
 cnt_blink = 0
-cnt_list = []
-exit_condition = True
+exit_condition = False
 
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor('resource\\raw\\shape_predictor_68_face_landmarks.dat')
@@ -43,20 +35,12 @@ model.summary()
 
 def detect_blink():
     global cnt_blink
-    global curr_time
-    global start_time
-    global end_time
-    global cnt_list
+    global exit_condition
     cap = cv2.VideoCapture(0)
-
-    # if(종료 버튼 누르면):  <== GUI로 구현   현재는 그런 기능 안넣음 강제종료 못함
-    #     exit_condition = False
+    exit_condition = False
 
     #실행 종료 버튼 누르기 전까지 계속 실행
-    while (True):
-      #10초 동안 눈 감은 횟수 판단
-      duration = -1 #강제 실행 종료인지 판단하는 인덱스
-      start_time = time.time()
+    while (not exit_condition):
       eye_condition = "initialize"
       while (True):
         if not cap.isOpened():
@@ -91,34 +75,13 @@ def detect_blink():
             #None
           else:
             eye_condition = "non-blinked"    
-    
-        curr_time = time.time()
-        if( (curr_time - start_time) > 10 ):
+        if(exit_condition == True):
           break
-        elif(exit_condition == False):
-          duration = curr_time - start_time
-          break 
-
-      if(duration == -1 or int(duration) == 0):
-        cnt_list.append(cnt_blink)
-        cnt_blink = 0
-        start_time = time.time()
-      else:
-        fin_elem = (cnt_blink, int(duration))
-        cnt_list.append(fin_elem)    
-  
-      print("10 sec past")
-      file_name = "dataset/count_blink.csv"
-      with open(file_name, 'w', newline='') as f:
-          writer = csv.writer(f)
-          writer.writerows([cnt_list])
-  
-      #여기서부터 GUI
-      #cnt_list 데이터를 그래프로 나타내기
-      #만약 gui 파일 이름이 GUI, 메소드 이름이 drawGraph라면
-      #위에 import GUI
-      #GUI.drawGraph(cnt_list)
-  
-      #마지막에 필요(강제종료인 경우)
-      if(exit_condition == False):
-        break
+      # cnt_list.append(cnt_blink)
+      # start_time = time.time()  
+      # cnt_blink = 0
+      # print("10 sec past")
+      # file_name = "dataset/count_blink.csv"
+      # with open(file_name, 'w', newline='') as f:
+      #     writer = csv.writer(f)
+      #     writer.writerows([cnt_list])

@@ -166,7 +166,7 @@ class Ui_MainWindow(object):
     
     def dia_open(self):
         self.dialogCur.show()
-        time.sleep(1.5)
+        time.sleep(10)
         self.dialogCur.hide()
 
     def dialogCur_status_update__fileAdd(self):

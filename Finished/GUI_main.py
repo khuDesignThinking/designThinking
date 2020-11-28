@@ -30,7 +30,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(310, 165)
-
+        MainWindow.setWindowFlag(QtCore.Qt.WindowCloseButtonHint, False)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
@@ -62,13 +62,22 @@ class Ui_MainWindow(object):
         self.age.setStyleSheet("background-color: rgb(255,255,255);font: bold 14px;")
 
         self.start_btn = QtWidgets.QPushButton(self.centralwidget)
-        self.start_btn.setGeometry(QtCore.QRect(159, 19, 133, 46))
+        self.start_btn.setGeometry(QtCore.QRect(159, 19, 133, 20))
         font = QtGui.QFont()
         font.setFamily("한컴 백제 B")
         font.setPointSize(12)
         self.start_btn.setFont(font)
         self.start_btn.setObjectName("start_btn")
         self.start_btn.setStyleSheet("background-color: rgb(255,255,255); border-style: outset;    border-width: 2px;    border-radius: 7px;    font: bold 14px;")
+
+        self.exit_btn = QtWidgets.QPushButton(self.centralwidget)
+        self.exit_btn.setGeometry(QtCore.QRect(159, 45, 133, 20))
+        font = QtGui.QFont()
+        font.setFamily("한컴 백제 B")
+        font.setPointSize(12)
+        self.exit_btn.setFont(font)
+        self.exit_btn.setObjectName("start_btn")
+        self.exit_btn.setStyleSheet("background-color: rgb(255,255,255); border-style: outset;    border-width: 2px;    border-radius: 7px;    font: bold 14px;")
 
         self.brightness_check = QtWidgets.QCheckBox(self.centralwidget)
         self.brightness_check.setGeometry(QtCore.QRect(20, 84, 125, 16))
@@ -172,7 +181,11 @@ class Ui_MainWindow(object):
 
         self.graphic_show.clicked.connect(lambda: self.show_graphic(MainWindow))
         self.manual.clicked.connect(self.dialogInfo_open)
+        self.exit_btn.clicked.connect(self.exit)
     
+    def exit(self):
+        exit(100)
+
     def ready_start(self):
         countBlink.exit_condition = False
         time.sleep(0.1)
@@ -262,6 +275,7 @@ class Ui_MainWindow(object):
         self.age.setItemText(0, _translate("MainWindow", "청소년"))
         self.age.setItemText(1, _translate("MainWindow", "성인"))
         self.start_btn.setText(_translate("MainWindow", "측정 시작"))
+        self.exit_btn.setText(_translate("MainWindow", "프로그램 종료"))
         self.brightness_check.setText(_translate("MainWindow", "화면 밝기 조정"))
     
     def select_g(self):
