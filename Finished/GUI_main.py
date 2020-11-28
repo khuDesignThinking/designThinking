@@ -138,6 +138,21 @@ class Ui_MainWindow(object):
 
         #현재 상태 나타내기에 이용
         self.dialogCur = QDialog()
+        self.dialogCur.setWindowTitle('Current Eye status')
+        self.dialogCur.resize(140, 83)
+        self.labDialog = QtWidgets.QLabel(self.dialogCur)
+        self.labDialog.setGeometry(0, 0, 140, 83)
+        self.labDialog.setText("")
+        self.labDialog.setObjectName("labDialog")
+        ag = QDesktopWidget().availableGeometry()
+        sg = QDesktopWidget().screenGeometry()
+        widget = self.dialogCur.geometry()
+        x = ag.width() - widget.width()
+        y = 2 * ag.height() - sg.height() - widget.height()
+        self.dialogCur.move(x, y)
+
+        self.timer = QTimer()
+        self.timer.timeout.connect(self.dia_open)
 
         self.start_btn.clicked.connect(self.ready_start)
         self.start_btn.clicked.connect(self.select_g)
@@ -151,7 +166,8 @@ class Ui_MainWindow(object):
         self.start_btn.clicked.connect(self.gp_starter) # 3
         self.start_btn.clicked.connect(self.gp_updater)# 3
 
-        self.start_btn.clicked.connect(self.dialogCur_open)
+        self.start_btn.clicked.connect(self.start_timer)
+        self.start_btn.clicked.connect(self.tray_open)
 
         self.graphic_show.clicked.connect(lambda: self.show_graphic(MainWindow))
         self.manual.clicked.connect(self.dialogInfo_open)
@@ -160,29 +176,18 @@ class Ui_MainWindow(object):
         countBlink.exit_condition = False
         time.sleep(0.1)
 
+    def start_timer(self):
+        self.timer.start(10000)
+
     def show_graphic(self, MainWindow):
         self.dialog.show()
 
-    def dialogCur_open(self):
-        self.hide()
-        self.dialogCur.setWindowTitle('Current Eye status')
-        self.dialogCur.setWindowModality(Qt.ApplicationModal)
-        self.dialogCur.resize(140, 83)
-
-        ag = QDesktopWidget().availableGeometry()
-        sg = QDesktopWidget().screenGeometry()
-        widget = self.dialogCur.geometry()
-        x = ag.width() - widget.width()
-        y = 2 * ag.height() - sg.height() - widget.height()
-        self.dialogCur.move(x, y)
-
-        self.labDialog = QtWidgets.QLabel(self.dialogCur)
-        self.labDialog.setGeometry(0, 0, 140, 83)
-        self.labDialog.setText("")
-        self.labDialog.setObjectName("labDialog")
-        self.labDialog.setAlignment(QtCore.Qt.AlignCenter)
-        
+    def dia_open(self):
         self.dialogCur.show()
+        QtCore.QTimer.singleShot(1500, self.dia_close)
+
+    def dia_close(self):
+        self.dialogCur.hide()
 
     def dialogCur_status_update__fileAdd(self):
         cnt_blink_list = []
@@ -225,13 +230,14 @@ class Ui_MainWindow(object):
             pass   
     
     def tray_open(self):
-        #self.hide()
+        self.hide()
         self.tray.setVisible(True)
 
     def tray_close(self):
         countBlink.exit_condition = True
         Thread2.vid.stopVideo()
         self.tray.setVisible(False)
+        self.timer.stop()
         self.show()
     
     def d_su_starter(self):
