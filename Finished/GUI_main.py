@@ -140,6 +140,7 @@ class Ui_MainWindow(object):
         self.dialogCur = QDialog()
         self.dialogCur.setWindowTitle('Current Eye status')
         self.dialogCur.resize(140, 83)
+        self.dialogCur.setWindowFlag(QtCore.Qt.WindowCloseButtonHint, False)
         self.labDialog = QtWidgets.QLabel(self.dialogCur)
         self.labDialog.setGeometry(0, 0, 140, 83)
         self.labDialog.setText("")
