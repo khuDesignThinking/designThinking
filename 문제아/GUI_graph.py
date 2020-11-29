@@ -1,10 +1,3 @@
-"""
-dev : 김희성
-date : 2020/11/12
-This module show graph.jpg every 10second
-dependency : draw_graph.py, 
-Next thing I have to do is connect with main thread
-"""
 import cv2
 import sys
 from PyQt5 import QtCore

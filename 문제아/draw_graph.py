@@ -1,8 +1,11 @@
 from matplotlib import pyplot as plt
-import test_gui3 as gui
+import csv
 
+# < int_blink_count = [int(blink_data) for blink_data in string_blink_count] 
+#   ValueError: invalid literal for int() with base 10: '' > 
+# 오류가 뜨는 경우 count_blink.csv 파일을 지우세요
 
-def load_source(source_directory:str = "dataset/count_blink.csv") -> list:
+def load_source(source_directory:str = "dataset/count_blink.csv"):
     """
     If there is no csv file, This function make count_blink.csv file
     """
@@ -10,9 +13,10 @@ def load_source(source_directory:str = "dataset/count_blink.csv") -> list:
         with open(source_directory, 'r') as f:
             pass
     except:
-        with open(source_directory, 'w') as f:
-            f.write("15, 12, 15, 16, 10, 14") # this is test data
-
+        with open(source_directory, 'w', newline='') as f:
+            writer = csv.writer(f)
+            d = [0]
+            writer.writerows([d]) # this is test data
     with open(source_directory, 'r') as f:
         data = f.read()
     string_blink_count = data.split(",")
@@ -20,7 +24,7 @@ def load_source(source_directory:str = "dataset/count_blink.csv") -> list:
     return int_blink_count
     
 
-def update_graph(image_directory: str = "dataset/graph.jpg") -> None:
+def update_graph(image_directory: str = "dataset/graph.jpg"):
     """
     This function make "resource/images/graph.jpg" file
     param: 
