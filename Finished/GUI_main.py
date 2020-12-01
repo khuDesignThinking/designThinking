@@ -29,7 +29,7 @@ class Thread2(QThread):
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(310, 165)
+        MainWindow.setFixedSize(310, 165)
         MainWindow.setWindowFlag(QtCore.Qt.WindowCloseButtonHint, False)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -39,27 +39,52 @@ class Ui_MainWindow(object):
         palette.setBrush(10,QBrush(img))
         MainWindow.setPalette(palette)
 
-        self.gender = QtWidgets.QComboBox(self.centralwidget)
-        self.gender.setGeometry(QtCore.QRect(19, 19, 134, 20))
+        self.rbm = QtWidgets.QRadioButton('남성', self)
+        self.rbm.setGeometry(QtCore.QRect(19, 19, 70, 20))
         font = QtGui.QFont()
         font.setFamily("한컴 백제 M")
         font.setPointSize(9)
-        self.gender.setFont(font)
-        self.gender.setObjectName("gender")
-        self.gender.addItem("")
-        self.gender.addItem("")
-        self.gender.setStyleSheet("background-color: rgb(255,255,255);font: bold 14px;")
+        self.rbm.setFont(font)
+        self.rbm.setObjectName("male")
+        self.rbm.setStyleSheet("font: bold 14px;")
 
-        self.age = QtWidgets.QComboBox(self.centralwidget)
-        self.age.setGeometry(QtCore.QRect(19, 45, 134, 20))
+        self.rbf = QtWidgets.QRadioButton('여성', self)
+        self.rbf.setGeometry(QtCore.QRect(90, 19, 60, 20))        
         font = QtGui.QFont()
         font.setFamily("한컴 백제 M")
         font.setPointSize(9)
-        self.age.setFont(font)
-        self.age.setObjectName("age")
-        self.age.addItem("")
-        self.age.addItem("")
-        self.age.setStyleSheet("background-color: rgb(255,255,255);font: bold 14px;")
+        self.rbf.setFont(font)
+        self.rbf.setObjectName("female")
+        self.rbf.setStyleSheet("font: bold 14px;")
+
+        self.rby = QtWidgets.QRadioButton('청소년', self)
+        self.rby.setGeometry(QtCore.QRect(19, 45, 70, 20))        
+        font = QtGui.QFont()
+        font.setFamily("한컴 백제 M")
+        font.setPointSize(9)
+        self.rby.setFont(font)
+        self.rby.setObjectName("female")
+        self.rby.setStyleSheet("font: bold 14px;")
+
+        self.rbo = QtWidgets.QRadioButton('성인', self)
+        self.rbo.setGeometry(QtCore.QRect(90, 45, 60, 20))        
+        font = QtGui.QFont()
+        font.setFamily("한컴 백제 M")
+        font.setPointSize(9)
+        self.rbo.setFont(font)
+        self.rbo.setObjectName("female")
+        self.rbo.setStyleSheet("font: bold 14px;")
+        
+        self.btngroup1 = QButtonGroup()
+        self.btngroup2 = QButtonGroup()
+        
+        self.btngroup1.addButton(self.rbm)
+        self.btngroup1.addButton(self.rbf)
+        self.btngroup2.addButton(self.rby)
+        self.btngroup2.addButton(self.rbo)
+        
+        self.rbm.setChecked(True)
+        self.rby.setChecked(True)
 
         self.start_btn = QtWidgets.QPushButton(self.centralwidget)
         self.start_btn.setGeometry(QtCore.QRect(159, 19, 133, 20))
@@ -68,7 +93,7 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.start_btn.setFont(font)
         self.start_btn.setObjectName("start_btn")
-        self.start_btn.setStyleSheet("background-color: rgb(255,255,255); border-style: outset;    border-width: 2px;    border-radius: 7px;    font: bold 14px;")
+        self.start_btn.setStyleSheet("background-color: rgb(255,255,255); border-style: inset;    border-width: 2px;    border-radius: 7px;    font: bold 14px;")
 
         self.exit_btn = QtWidgets.QPushButton(self.centralwidget)
         self.exit_btn.setGeometry(QtCore.QRect(159, 45, 133, 20))
@@ -76,8 +101,8 @@ class Ui_MainWindow(object):
         font.setFamily("한컴 백제 B")
         font.setPointSize(12)
         self.exit_btn.setFont(font)
-        self.exit_btn.setObjectName("start_btn")
-        self.exit_btn.setStyleSheet("background-color: rgb(255,255,255); border-style: outset;    border-width: 2px;    border-radius: 7px;    font: bold 14px;")
+        self.exit_btn.setObjectName("exit_btn")
+        self.exit_btn.setStyleSheet("background-color: rgb(255,255,255); border-style: inset;    border-width: 2px;    border-radius: 7px;    font: bold 14px;")
 
         self.brightness_check = QtWidgets.QCheckBox(self.centralwidget)
         self.brightness_check.setGeometry(QtCore.QRect(20, 84, 125, 16))
@@ -100,7 +125,7 @@ class Ui_MainWindow(object):
         font.setPointSize(9)
         self.manual.setFont(font)
         self.manual.setObjectName("manual")
-        self.manual.setStyleSheet("background-color: rgb(180,197,222); border-style: outset;    border-width: 2px;    border-radius: 7px;    font: bold 14px;")
+        self.manual.setStyleSheet("background-color: rgb(180,197,222); border-style: inset;    border-width: 2px;    border-radius: 7px;    font: bold 14px;")
 
         self.graphic_show = QtWidgets.QPushButton("그래프 나타내기", self.centralwidget)
         self.graphic_show.setGeometry(QtCore.QRect(159, 80, 133, 24))
@@ -110,7 +135,7 @@ class Ui_MainWindow(object):
         self.graphic_show.setFont(font)
         self.graphic_show.setObjectName("graphic_show")
         self.graphic_show.setEnabled(True)
-        self.graphic_show.setStyleSheet("background-color: rgb(219,214,239); border-style: outset;    border-width: 2px;    border-radius: 7px;    font: bold 14px;")        
+        self.graphic_show.setStyleSheet("background-color: rgb(219,214,239); border-style: inset;    border-width: 2px;    border-radius: 7px;    font: bold 14px;")        
         
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -165,8 +190,7 @@ class Ui_MainWindow(object):
         self.timer.timeout.connect(self.dia_open)
 
         self.start_btn.clicked.connect(self.ready_start)
-        self.start_btn.clicked.connect(self.select_g)
-        self.start_btn.clicked.connect(self.select_a)
+
         # 순서 
         # 1. countBlink에서 계속 카운트 기록 
         # 2. dialogCurstatusUpdate에서 10초 단위로 cnt_blink 초기화 & 파일 추가
@@ -182,7 +206,7 @@ class Ui_MainWindow(object):
         self.graphic_show.clicked.connect(lambda: self.show_graphic(MainWindow))
         self.manual.clicked.connect(self.dialogInfo_open)
         self.exit_btn.clicked.connect(self.exit)
-    
+        
     def exit(self):
         exit(100)
 
@@ -218,7 +242,7 @@ class Ui_MainWindow(object):
                 writer.writerows([cnt_blink_list])
             # status_update
             self.bright_contrl()
-            if (self.gender.currentText() == "남성" or self.age.currentText() == "청소년"):
+            if (self.rbm.isChecked or self.rby.isChecked):
                 if(cnt_blink <=1):
                     if self.sound_alarm.isChecked():
                         winsound.Beep(493, 200)
@@ -270,24 +294,10 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "EyeProtector"))
-        self.gender.setItemText(0, _translate("MainWindow", "여성"))
-        self.gender.setItemText(1, _translate("MainWindow", "남성"))
-        self.age.setItemText(0, _translate("MainWindow", "청소년"))
-        self.age.setItemText(1, _translate("MainWindow", "성인"))
         self.start_btn.setText(_translate("MainWindow", "측정 시작"))
         self.exit_btn.setText(_translate("MainWindow", "프로그램 종료"))
         self.brightness_check.setText(_translate("MainWindow", "화면 밝기 조정"))
     
-    def select_g(self):
-        global gender
-        gender=self.gender.currentText()
-        print(self.gender.currentText())
-    
-    def select_a(self):
-        global age
-        age=self.age.currentText()
-        print(self.age.currentText())
-
     def update_gp(self):
         while(not countBlink.exit_condition):
             time.sleep(10)
