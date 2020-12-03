@@ -1,16 +1,15 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
-from PyQt5.QtWebEngineWidgets import *
-from PyQt5.QtGui import *
-import countBlink
+from PyQt5.QtWidgets import QRadioButton, QButtonGroup, QDialog, QDesktopWidget, QApplication, QMainWindow
+from PyQt5.QtCore import QThread, QTimer, QUrl
+from PyQt5.QtGui import QImage, QPalette, QBrush
+from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEngineProfile, QWebEnginePage
 import time
 import csv
-from threading import Thread
-import GUI_graph
 import winsound
+from threading import Thread
+import countBlink
+import GUI_graph
 import control_brightness as bright
-
 class Thread1(QThread):
     def __init__(self, parent):
         super().__init__(parent)
@@ -342,6 +341,7 @@ class Ui_MainWindow(object):
         self.widget_4.setGeometry(QtCore.QRect(10, 10, 661, 471))
         self.widget_4.setObjectName("widget_4")
         self.tabWidget.addTab(self.tab_4, "눈에 좋은 음식과 해로운 음식")
+
         ###
         self.tabweb_1=QWebEngineView(self.widget)
         profile = QWebEngineProfile(self.tabweb_1)

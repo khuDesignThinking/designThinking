@@ -38,7 +38,7 @@ def detect_blink():
     global exit_condition
     cap = cv2.VideoCapture(0)
     exit_condition = False
-
+    
     #실행 종료 버튼 누르기 전까지 계속 실행
     while (not exit_condition):
       eye_condition = "initialize"

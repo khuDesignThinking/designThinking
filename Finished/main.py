@@ -1,11 +1,7 @@
 import sys
-from PyQt5 import *
-from PyQt5.QtCore import *
-from PyQt5.QtWidgets import *
-from threading import Thread
-import time
+from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QApplication
 from GUI_main import Ui_MainWindow 
-
 
 class kinwriter(QMainWindow, Ui_MainWindow): 
     
