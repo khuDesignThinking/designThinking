@@ -92,7 +92,7 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.start_btn.setFont(font)
         self.start_btn.setObjectName("start_btn")
-        self.start_btn.setStyleSheet("background-color: rgb(255,255,255); border-style: inset;    border-width: 2px;    border-radius: 7px;    font: bold 14px;")
+        self.start_btn.setStyleSheet("QPushButton {background-color: rgb(255,255,255); border-style: inset;    border-width: 2px;    border-radius: 7px;    font: bold 14px;}" "QPushButton:pressed { background-color : rgb(200, 200, 200)}")
 
         self.exit_btn = QtWidgets.QPushButton(self.centralwidget)
         self.exit_btn.setGeometry(QtCore.QRect(159, 45, 133, 20))
@@ -101,7 +101,7 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.exit_btn.setFont(font)
         self.exit_btn.setObjectName("exit_btn")
-        self.exit_btn.setStyleSheet("background-color: rgb(255,255,255); border-style: inset;    border-width: 2px;    border-radius: 7px;    font: bold 14px;")
+        self.exit_btn.setStyleSheet("QPushButton {background-color: rgb(255,255,255); border-style: inset;    border-width: 2px;    border-radius: 7px;    font: bold 14px;}" "QPushButton:pressed {background-color : rgb(200, 200, 200)}")
 
         self.brightness_check = QtWidgets.QCheckBox(self.centralwidget)
         self.brightness_check.setGeometry(QtCore.QRect(20, 84, 125, 16))
@@ -124,7 +124,7 @@ class Ui_MainWindow(object):
         font.setPointSize(9)
         self.manual.setFont(font)
         self.manual.setObjectName("manual")
-        self.manual.setStyleSheet("background-color: rgb(180,197,222); border-style: inset;    border-width: 2px;    border-radius: 7px;    font: bold 14px;")
+        self.manual.setStyleSheet("QPushButton {background-color: rgb(180,197,222); border-style: inset;    border-width: 2px;    border-radius: 7px;    font: bold 14px;}" "QPushButton:pressed {background-color : rgb(125, 142, 167)}")
 
         self.graphic_show = QtWidgets.QPushButton("그래프 나타내기", self.centralwidget)
         self.graphic_show.setGeometry(QtCore.QRect(159, 80, 133, 24))
@@ -134,7 +134,7 @@ class Ui_MainWindow(object):
         self.graphic_show.setFont(font)
         self.graphic_show.setObjectName("graphic_show")
         self.graphic_show.setEnabled(True)
-        self.graphic_show.setStyleSheet("background-color: rgb(219,214,239); border-style: inset;    border-width: 2px;    border-radius: 7px;    font: bold 14px;")        
+        self.graphic_show.setStyleSheet("QPushButton {background-color: rgb(219,214,239); border-style: inset;    border-width: 2px;    border-radius: 7px;    font: bold 14px;}" "QPushButton:pressed {background-color : rgb(164, 159, 184)}")        
         
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -149,11 +149,7 @@ class Ui_MainWindow(object):
         self.tray = QtWidgets.QSystemTrayIcon()
         self.tray.setIcon(icon)
         self.tray.setVisible(False)
-        self.menu = QtWidgets.QMenu()
-        self.quit = QtWidgets.QAction("측정종료")
-        self.menu.addAction(self.quit)
-        self.tray.setContextMenu(self.menu)
-        self.quit.triggered.connect(self.tray_close)
+        self.tray.activated.connect(self.tray_close)
 
         #눈건강 info에 이용
         self.dialog2 = QDialog()
@@ -182,7 +178,7 @@ class Ui_MainWindow(object):
         sg = QDesktopWidget().screenGeometry()
         widget = self.dialogCur.geometry()
         x = ag.width() - widget.width()
-        y = 2 * ag.height() - sg.height() - widget.height()
+        y = 0
         self.dialogCur.move(x, y)
 
         self.timer = QTimer()
