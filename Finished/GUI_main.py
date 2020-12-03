@@ -220,13 +220,16 @@ class Ui_MainWindow(object):
         self.dialog.show()
 
     def dia_open(self):
-        self.dialogCur.show()
+        numblink = countBlink.cnt_blink
+        if ( (numblink <= 1 and (self.rbm.isChecked or self.rby.isChecked)) or (numblink <= 2 and (self.rbf.isChecked or self.rbo.isChecked)) ):
+            self.dialogCur.show()
         QtCore.QTimer.singleShot(1500, self.dia_close)
 
     def dia_close(self):
         self.dialogCur.hide()
 
     def dialogCur_status_update__fileAdd(self):
+        self.labDialog.setPixmap(QtGui.QPixmap("resource/image/bad.jpg"))
         cnt_blink_list = []
         while(not countBlink.exit_condition):
             countBlink.cnt_blink = 0
@@ -245,20 +248,20 @@ class Ui_MainWindow(object):
                 if(cnt_blink <=1):
                     if self.sound_alarm.isChecked():
                         winsound.Beep(493, 200)
-                    self.labDialog.setPixmap(QtGui.QPixmap("resource/image/bad.jpg"))
-                elif(1 < cnt_blink <=3):
-                    self.labDialog.setPixmap(QtGui.QPixmap("resource/image/soso.jpg"))
-                elif(cnt_blink >3):
-                    self.labDialog.setPixmap(QtGui.QPixmap("resource/image/good.jpg"))
+                #     self.labDialog.setPixmap(QtGui.QPixmap("resource/image/bad.jpg"))
+                # elif(1 < cnt_blink <=3):
+                #     self.labDialog.setPixmap(QtGui.QPixmap("resource/image/soso.jpg"))
+                # elif(cnt_blink >3):
+                #     self.labDialog.setPixmap(QtGui.QPixmap("resource/image/good.jpg"))
             else:
                 if(cnt_blink <=2):
                     if self.sound_alarm.isChecked():
                         winsound.Beep(493, 200)
-                    self.labDialog.setPixmap(QtGui.QPixmap("resource/image/bad.jpg"))
-                elif(2 < cnt_blink <=5):
-                    self.labDialog.setPixmap(QtGui.QPixmap("resource/image/soso.jpg"))
-                elif(cnt_blink >5):
-                    self.labDialog.setPixmap(QtGui.QPixmap("resource/image/good.jpg"))
+                #     self.labDialog.setPixmap(QtGui.QPixmap("resource/image/bad.jpg"))
+                # elif(2 < cnt_blink <=5):
+                #     self.labDialog.setPixmap(QtGui.QPixmap("resource/image/soso.jpg"))
+                # elif(cnt_blink >5):
+                #     self.labDialog.setPixmap(QtGui.QPixmap("resource/image/good.jpg"))
 
     def bright_contrl(self):
         if self.brightness_check.isChecked():
