@@ -315,60 +315,51 @@ class Ui_MainWindow(object):
 
         self.tab = QtWidgets.QWidget(self.dialog2)
         self.tab.setObjectName("tab")
-        self.widget = QtWidgets.QWidget(self.tab)
-        self.widget.setGeometry(QtCore.QRect(10, 10, 661, 471))
-        self.widget.setObjectName("widget")
         self.tabWidget.addTab(self.tab, "눈 건강의 중요성")
 
         self.tab_2 = QtWidgets.QWidget(self.dialog2)
         self.tab_2.setObjectName("tab")
-        self.widget_2 = QtWidgets.QWidget(self.tab_2)
-        self.widget_2.setGeometry(QtCore.QRect(10, 10, 661, 471))
-        self.widget_2.setObjectName("widget_2")
         self.tabWidget.addTab(self.tab_2, "눈 운동방법")
 
         self.tab_3 = QtWidgets.QWidget()
         self.tab_3.setObjectName("tab_3")
-        self.widget_3 = QtWidgets.QWidget(self.tab_3)
-        self.widget_3.setGeometry(QtCore.QRect(10, 10, 661, 471))
-        self.widget_3.setObjectName("widget")
         self.tabWidget.addTab(self.tab_3, "눈건강을 위한 생활 수칙")
         ### 더 추가 하고 싶은 부분은 이만큼 복붙해서 이름 바꾸면 됩니다.
         self.tab_4 = QtWidgets.QWidget()
         self.tab_4.setObjectName("tab_4")
-        self.widget_4=QtWidgets.QWidget(self.tab_4)
-        self.widget_4.setGeometry(QtCore.QRect(10, 10, 661, 471))
-        self.widget_4.setObjectName("widget_4")
         self.tabWidget.addTab(self.tab_4, "눈에 좋은 음식과 해로운 음식")
-
         ###
-        self.tabweb_1=QWebEngineView(self.widget)
+        self.tabweb_1=QWebEngineView(self.tab)
         profile = QWebEngineProfile(self.tabweb_1)
-        profile.setHttpUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36")
+        profile.setHttpUserAgent("Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko")
         page = QWebEnginePage(profile, self.tabweb_1)
         self.tabweb_1.setPage(page)
-        self.tabweb_1.setUrl(QUrl("https://blog.yonseibon.co.kr/life/%EA%B7%B8%EB%8F%99%EC%95%88-%EB%AA%B0%EB%9E%90%EB%8D%98-%EB%88%88-%EA%B1%B4%EA%B0%95%EC%9D%B4-%EC%A4%91%EC%9A%94%ED%95%9C-%EC%9D%B4%EC%9C%A0/")) 
+        self.tabweb_1.setUrl(QUrl("https://blog.yonseibon.co.kr/life/%EA%B7%B8%EB%8F%99%EC%95%88-%EB%AA%B0%EB%9E%90%EB%8D%98-%EB%88%88-%EA%B1%B4%EA%B0%95%EC%9D%B4-%EC%A4%91%EC%9A%94%ED%95%9C-%EC%9D%B4%EC%9C%A0/"))
+        self.tabweb_1.show()
         ###
-        self.tabweb_2=QWebEngineView(self.widget_2)
+        self.tabweb_2=QWebEngineView(self.tab_2)
         profile = QWebEngineProfile(self.tabweb_2)
-        profile.setHttpUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36")
+        profile.setHttpUserAgent("Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko")        
         page = QWebEnginePage(profile, self.tabweb_2)
         self.tabweb_2.setPage(page)
         self.tabweb_2.setUrl(QUrl("https://steptohealth.co.kr/7-exercise-for-your-eyes/"))
+        self.tabweb_2.show()
         ###
-        self.tabweb_3=QWebEngineView(self.widget_3)
+        self.tabweb_3=QWebEngineView(self.tab_3)
         profile = QWebEngineProfile(self.tabweb_3)
-        profile.setHttpUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36")
+        profile.setHttpUserAgent("Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko")
         page = QWebEnginePage(profile, self.tabweb_3)
         self.tabweb_3.setPage(page)
         self.tabweb_3.setUrl(QUrl("http://www.nrc.go.kr/portal/html/content.do?depth=ph&menu_cd=03_05"))
+        self.tabweb_3.show()
         ###
-        self.tabweb_4=QWebEngineView(self.widget_4)
+        self.tabweb_4=QWebEngineView(self.tab_4)
         profile = QWebEngineProfile(self.tabweb_4)
-        profile.setHttpUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36")
+        profile.setHttpUserAgent("Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko")
         page = QWebEnginePage(profile, self.tabweb_4)
         self.tabweb_4.setPage(page)
         self.tabweb_4.setUrl(QUrl("http://www.samsunghospital.com/upload/health/1438754922163_234165.jpg"))
+        self.tabweb_4.show()
         ###위에줄에도 추가한 항목 추가
         self.tabweb_1.setGeometry(QtCore.QRect(10, 10, 661, 471))
         self.tabweb_2.setGeometry(QtCore.QRect(10, 10, 661, 471))
@@ -376,6 +367,17 @@ class Ui_MainWindow(object):
         self.tabweb_4.setGeometry(QtCore.QRect(10, 10, 661, 471))
         ###위에줄에도 추가한 항목 추가
         self.dialog2.show()
+        #close시 webview close
+        if(self.dialog2.exec()==False):
+            self.tabweb_1.hide()
+            self.tabweb_2.hide()
+            self.tabweb_3.hide()
+            self.tabweb_4.hide()
+            self.tabweb_1.deleteLater()
+            self.tabweb_2.deleteLater()
+            self.tabweb_3.deleteLater()
+            self.tabweb_4.deleteLater()
+
 
 if __name__ == "__main__":
     import sys
